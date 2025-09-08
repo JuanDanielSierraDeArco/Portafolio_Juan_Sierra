@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- NAVBAR -->
+  <nav class="fixed w-full bg-white shadow z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold">TuNombre</h1>
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="#home" class="hover:text-blue-500">Home</a></li>
+        <li><a href="#about" class="hover:text-blue-500">About</a></li>
+        <li><a href="#skills" class="hover:text-blue-500">Skills</a></li>
+        <li><a href="#projects" class="hover:text-blue-500">Projects</a></li>
+        <li><a href="#contact" class="hover:text-blue-500">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="relative flex flex-col md:flex-row items-center justify-center min-h-screen px-6">
+    <!-- Fondo partículas -->
+    <div id="tsparticles" class="absolute inset-0 -z-10"></div>
+
+    <!-- Texto -->
+    <div class="flex-1 text-center md:text-left">
+      <h2 class="text-4xl font-bold">¡Hola! Soy <span class="text-blue-600">Tu Nombre</span></h2>
+      <h3 class="text-2xl mt-4">Soy <span id="typed"></span></h3>
+      <button class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700">
+        Contáctame
+      </button>
+      <div class="flex space-x-4 mt-6 justify-center md:justify-start">
+        <a href="#" class="text-gray-600 hover:text-blue-600"><i class="fab fa-github"></i></a>
+        <a href="#" class="text-gray-600 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <!-- Avatar -->
+    <div class="flex-1 flex justify-center mt-10 md:mt-0">
+      <img src="https://via.placeholder.com/300" alt="Avatar" class="rounded-full shadow-lg">
+    </div>
+  </section>
+
+  <!-- JS para Typed y Partículas -->
+  <script>
+    // Typed.js
+    new Typed("#typed", {
+      strings: ["Desarrollador Web", "Frontend Developer", "Freelancer"],
+      typeSpeed: 70,
+      backSpeed: 50,
+      loop: true
+    });
+
+    // Particles.js
+    tsParticles.load("tsparticles", {
+      background: { color: "#ffffff" },
+      particles: {
+        number: { value: 80 },
+        color: { value: "#000000" },
+        links: { enable: true, color: "#000000", distance: 150 },
+        move: { enable: true, speed: 2 }
+      }
+    });
+  </script>
+</body>
+</html>
