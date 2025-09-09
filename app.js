@@ -18,3 +18,19 @@ modeBtn.addEventListener("click", () =>{
 
     modeBtn.textContent = isLight ? "☀️" : "🌙";
 });
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+// Abrir / cerrar menú
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('active');
+});
+
+// Cerrar al hacer clic en un enlace
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+  });
+});
+

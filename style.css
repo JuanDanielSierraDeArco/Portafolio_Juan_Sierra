@@ -85,11 +85,7 @@ img {
     opacity: 1;
     color: var(--accent);
 }
-.mobile-menu{
-    display: none;
-}
 /* ====== Botones ====== */
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -112,18 +108,67 @@ img {
     box-shadow: none;
 }
 
+.mobile-menu {
+  position: absolute;
+  top: 64px;          /* debajo de la navbar */
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
 
-
-
-
-
-@media (max-width: 640px){
-    .nav-links{display:none}
-    .menu-btn{display:inline-flex; align-items:center; gap:8px; border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); padding:8px 12px; border-radius:10px}
-    .mobile-menu{display:none; position:absolute; top:64px; left:0; right:0; background:var(--surface); border-bottom:1px solid color-mix(in oklab, var(--muted) 25%, transparent)}
-    .mobile-menu a{display:block; padding:14px 24px; border-top:1px solid color-mix(in oklab, var(--muted) 18%, transparent)}
+  transform: translateY(-20px);  /* arranca desplazado hacia arriba */
+  opacity: 0;                   /* invisible */
+  pointer-events: none;          /* no interactúa cuando está oculto */
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.mobile-menu a {
+  display: block;
+  padding: 14px 24px;
+  border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);
+}
 
+/* Estado visible */
+.mobile-menu.active {
+    display: block;
+  transform: translateY(0);   /* se desliza hacia abajo */
+  opacity: 1;                 /* aparece con fade */
+  pointer-events: auto;       /* ahora sí se puede hacer clic */
+}
 
+/* ====== Desktop y tablet grande (≥895px) ====== */
+@media (min-width: 895px){
+  #menuBtn {display: none;}
+  .nav-links { display: flex; gap: 20px; } /* mostramos enlaces */
+  .menu-btn { display: none; }             /* ocultamos botón ☰ */
+  .mobile-menu { display: none !important; } /* ocultamos menú mobile */
+}
+
+/* ====== Tablet pequeña y móviles (≤894px) ====== */
+@media (max-width: 894px){
+  .nav-links { display: none; }            /* ocultamos enlaces */
+  .menu-btn {
+    display: inline-flex;                  /* mostramos botón ☰ */
+    align-items: center;
+    gap: 8px;
+    border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+  .mobile-menu {
+    display: none;                         /* oculto por defecto */
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  }
+  .mobile-menu.active {
+    display: block;                        /* visible al hacer clic */
+  }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 24px;
+    border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);
+  }
+}
 
