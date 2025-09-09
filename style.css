@@ -1,0 +1,23 @@
+:root{
+  --bg: #0e0e0e;        /* negro casi puro */
+  --surface: #1a1a1a;   /* gris muy oscuro */
+  --text: #e5e5e5;      /* gris claro */
+  --muted: #a1a1a1;     /* gris medio */
+  --accent: #007bff;    /* azul eléctrico */
+  --accent-2: #00d1b2;  /* verde agua sutil */
+  --card: #1f1f1f;      
+  --shadow: 0 10px 30px rgba(0,0,0,.4);
+  --radius: 18px;
+}
+
+/* ====== MODO CLARO ====== */
+.light{
+  --bg: #f5f9ff;        /* azul muy claro casi blanco */
+  --surface: #ffffff;   /* fondo de tarjetas y secciones */
+  --text: #0d1a26;      /* gris azulado oscuro para buen contraste */
+  --muted: #6b7a8c;     /* gris azulado medio para subtítulos */
+  --accent: #2d8cff;    /* azul brillante (se mantiene igual) */
+  --accent-2: #ffb400;  /* dorado cálido (igual que en oscuro) */
+  --card: #ffffff;      
+  --shadow: 0 10px 25px rgba(0, 0, 0, .1);
+}
