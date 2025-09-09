@@ -1,185 +1,175 @@
-/*//Modo oscuro/claro
-const root = document.documentElement;
-const modeBtn = document.getElementById("modeBtn");
-const THEME_KEY = "juan-theme";
-const saved = localStorage.getItem(THEME_KEY);
+// app.js
+// Versión robusta y comentada para manejar:
+// - Tema claro/oscuro (guardado en localStorage)
+// - Inicialización y recarga de tsParticles según el tema
+// - Menú móvil
+// - Protección contra errores (elementos que no existen, librería no cargada, etc.)
 
-// 1. Ver si hay un tema guardado en localStorage
-if (saved === 'light'){
-root.classList.add('light');
-modeBtn.textContent = "☀️";
-};
-
-modeBtn.addEventListener("click", () =>{
-    root.classList.toggle("light");
-    const isLight = root.classList.contains("light");
-
-    localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
-
-    modeBtn.textContent = isLight ? "☀️" : "🌙";
-
-
-  // Recargar partículas con nuevos colores
-  tsParticles.load("tsparticles", getParticlesConfig());
-});
-
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-
-// Abrir / cerrar menú
-menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('active');
-});
-
-// Cerrar al hacer clic en un enlace
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-  });
-});
-
-// Función para leer variables CSS
-function getCssVar(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
-
-// Configuración dinámica según el tema actual
-function getParticlesConfig() {
-  return {
-    background: {
-      color: getCssVar("--bg"),
-    },
-    particles: {
-      number: { value: 50 },
-      color: { value: getCssVar("--accent") },
-      links: { enable: true, color: getCssVar("--accent-2") },
-      move: { enable: true, speed: 1 },
-    },
-  };
-}
-
-// === Funciones para partículas ===
-function getCssVar(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
-
-function getParticlesConfig() {
-  const isLight = document.documentElement.classList.contains("light");
-
-  if (isLight) {
-    // ===== Tema Claro =====
-    return {
-      background: { color: getCssVar("--bg") },
-      particles: {
-        number: { value: 60 },
-        color: { value: getCssVar("--accent-2") }, // Doradas
-        links: { enable: true, color: getCssVar("--muted") }, // Gris azulado
-        move: { enable: true, speed: 1 }
-      }
-    };
-  } else {
-    // ===== Tema Oscuro =====
-    return {
-      background: { color: getCssVar("--bg") },
-      particles: {
-        number: { value: 80 },
-        color: { value: getCssVar("--accent") }, // Azul eléctrico
-        links: { enable: true, color: getCssVar("--accent-2") }, // Verde agua
-        move: { enable: true, speed: 1.5 }
-      }
-    };
-  }
-}
-
-// === Inicializar partículas al cargar la página ===
 document.addEventListener("DOMContentLoaded", () => {
-  tsParticles.load("tsparticles", getParticlesConfig());
-});*/
-// app.js (sustituye el contenido existente)
-document.addEventListener("DOMContentLoaded", () => {
+  // --- Referencias al DOM --------------------------------------------------
+  // "root" apunta a <html> para cambiar variables CSS (clase .light)
   const root = document.documentElement;
+
+  // Botón que alterna tema (asegúrate que exista en el HTML: id="modeBtn")
   const modeBtn = document.getElementById("modeBtn");
+
+  // Botones/menu móvil (ids deben existir en HTML)
   const menuBtn = document.getElementById("menuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
+
+  // Clave para almacenar el tema en localStorage
   const THEME_KEY = "juan-theme";
 
-  // Recuperar tema guardado
+  // --- Recuperar tema guardado (si existe) -------------------------------
+  // Si el usuario ya escogió tema antes, aplicamos la clase .light
   const saved = localStorage.getItem(THEME_KEY);
   if (saved === "light") {
     root.classList.add("light");
-    if (modeBtn) modeBtn.textContent = "☀️";
+    if (modeBtn) modeBtn.textContent = "☀️"; // icono del sol si está en claro
+  } else {
+    // Si no hay valor guardado, mantenemos el tema por defecto (oscuro).
+    // Opcional: podrías usar prefers-color-scheme para detectar preferencia del OS.
   }
 
-  // Lee variable CSS
+  // --- Función auxiliar: leer variables CSS ------------------------------
+  // Devuelve el valor de la variable CSS --nombre (ej: --accent)
   function getCssVar(name) {
+    // getComputedStyle sobre documentElement para leer las variables definidas en :root o .light
     return getComputedStyle(root).getPropertyValue(name).trim();
   }
 
-  // Genera la config según tema (solo una función)
+  // --- Generar configuración de tsParticles según el tema ---------------
+  // Aquí definimos las opciones que pasaremos a tsParticles.load(...)
   function getParticlesConfig() {
+    // Detectamos si el tema actual es claro
     const isLight = root.classList.contains("light");
+
+    // Elegimos colores / cantidad / velocidad en función del tema
     const particleColor = isLight ? getCssVar("--accent-2") : getCssVar("--accent");
     const linkColor = isLight ? getCssVar("--muted") : getCssVar("--accent-2");
-    const number = isLight ? 60 : 80;
-    const speed = isLight ? 1 : 1.5;
+    const number = isLight ? 60 : 80;        // más partículas en modo oscuro
+    const speed = isLight ? 1 : 1.5;         // velocidad ligeramente mayor en oscuro
 
+    // Devolvemos el objeto completo de configuración. Comentarios internos explican cada bloque.
     return {
+      // fullScreen hace que el canvas ocupe toda la pantalla; zIndex asegura que quede detrás
       fullScreen: { enable: true, zIndex: -1 },
+
+      // color de fondo (usamos la variable CSS --bg)
       background: { color: getCssVar("--bg") },
+
+      // límite de frames por segundo (opcional para rendimiento)
       fpsLimit: 60,
+
+      // Interactividad (hover, click, resize)
       interactivity: {
         events: {
+          // onHover: al pasar el ratón las partículas se repelen (modo "repulse")
           onHover: { enable: true, mode: "repulse" },
+
+          // onClick: al hacer clic se "empujan" nuevas partículas (modo "push")
           onClick: { enable: true, mode: "push" },
+
+          // resize: actualiza el canvas al redimensionar la ventana
           resize: true
         },
         modes: {
+          // Configuración del modo "repulse"
           repulse: { distance: 120, duration: 0.4 },
+
+          // Configuración del modo "push" (al hacer clic)
           push: { quantity: 4 }
         }
       },
-      particles: {
-        number: { value: number, density: { enable: true, area: 800 } },
-        color: { value: particleColor },
-        links: { enable: true, color: linkColor, distance: 160, opacity: 0.35, width: 1 },
-        move: { enable: true, speed: speed, outModes: { default: "bounce" } },
-        shape: { type: ["circle", "triangle"] },
-        opacity: { value: 0.8, animation: { enable: true, speed: 1, minimumValue: 0.3 } },
-        size: { value: { min: 2, max: 6 }, animation: { enable: true, speed: 3, minimumValue: 1 } }
-      }
+
+      // Definición de partículas
+particles: {
+  number: { value: 60, density: { enable: true, area: 800 } },
+  color: { value: getCssVar("--accent") },
+  links: {
+    enable: true,
+    color: getCssVar("--accent-2"),
+    distance: 150,
+    opacity: 0.4,
+    width: 1
+  },
+  move: {
+    enable: true,
+    speed: 2,
+    direction: "none",
+    outModes: { default: "bounce" }
+  },
+shape: {
+  type: "char", // usamos caracteres
+  character: [
+    { value: "JS", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "HTML", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "CSS", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Python", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "C++", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Java", style: "normal", weight: "bold", font: "Verdana" }
+  ],
+},
+size: {
+  value: { min: 30, max: 60 } // ajusta tamaño de texto
+},
+color: {
+  value: ["#f7df1e", "#e34f26", "#2965f1", "#3776ab", "#00599C", "#b07219"] 
+  // Colores típicos: JS (amarillo), HTML (naranja), CSS (azul), Python (azul), C++ (azul oscuro), Java (marrón)
+},
+  opacity: {
+    value: 0.8,
+    animation: { enable: true, speed: 1, minimumValue: 0.3 }
+  },
+  size: {
+    value: { min: 3, max: 7 },
+    animation: { enable: true, speed: 2, minimumValue: 2 }
+  }
+}
+
     };
   }
 
-  // Carga/recarga partículas (comprueba que la librería exista)
+  // --- Cargar/recargar partículas ---------------------------------------
   function loadParticles() {
+    // Protección: comprobar que la librería tsParticles se haya cargado
     if (typeof tsParticles === "undefined") {
-      console.error("tsParticles no está cargado. Asegúrate de incluir la librería antes de app.js.");
+      console.error("tsParticles no está cargado. Asegúrate de incluir la librería antes de app.js");
       return;
     }
+
+    // Cargamos la configuración en el contenedor con id "tsparticles"
+    // tsParticles.load(referenciaHTMLid, opciones)
     tsParticles.load("tsparticles", getParticlesConfig());
   }
 
-  // Inicializar partículas
+  // Inicializamos al cargar la página
   loadParticles();
 
-  // Botón de tema
+  // --- Control del botón de tema ----------------------------------------
   if (modeBtn) {
     modeBtn.addEventListener("click", () => {
+      // Alterna la clase .light en <html>
       root.classList.toggle("light");
+
+      // Actualiza icono y localStorage
       const isLight = root.classList.contains("light");
       localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
       modeBtn.textContent = isLight ? "☀️" : "🌙";
 
-      // Recarga partículas con los nuevos colores
+      // Recargamos partículas para que tomen los nuevos colores/valores
       loadParticles();
     });
   } else {
+    // Mensaje útil para depuración si el button no existe
     console.warn("No se encontró #modeBtn en el DOM.");
   }
 
-  // Menú móvil (si existe)
+  // --- Menú móvil -------------------------------------------------------
   if (menuBtn && mobileMenu) {
     menuBtn.addEventListener("click", () => mobileMenu.classList.toggle("active"));
+
+    // Cerramos el menú cuando se pulsa uno de los enlaces
     mobileMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => mobileMenu.classList.remove("active"));
     });
