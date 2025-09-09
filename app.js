@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Definición de partículas
 particles: {
-  number: { value: 60, density: { enable: true, area: 800 } },
+  number: { value: 20, density: { enable: true, area: 800 } },
   color: { value: getCssVar("--accent") },
   links: {
     enable: true,
@@ -102,7 +102,7 @@ particles: {
 shape: {
   type: "char", // usamos caracteres
   character: [
-    { value: "JS", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "JavaScript", style: "normal", weight: "bold", font: "Verdana" },
     { value: "HTML", style: "normal", weight: "bold", font: "Verdana" },
     { value: "CSS", style: "normal", weight: "bold", font: "Verdana" },
     { value: "Python", style: "normal", weight: "bold", font: "Verdana" },
@@ -111,14 +111,14 @@ shape: {
   ],
 },
 size: {
-  value: { min: 30, max: 60 } // ajusta tamaño de texto
+  value: { min: 1500, max: 160 } // ajusta tamaño de texto
 },
 color: {
   value: ["#f7df1e", "#e34f26", "#2965f1", "#3776ab", "#00599C", "#b07219"] 
   // Colores típicos: JS (amarillo), HTML (naranja), CSS (azul), Python (azul), C++ (azul oscuro), Java (marrón)
 },
   opacity: {
-    value: 0.8,
+    value: 1.8,
     animation: { enable: true, speed: 1, minimumValue: 0.3 }
   },
   size: {
