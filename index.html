@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portafolio Juan Sierra</title>
 </head>
+<link rel="stylesheet" href="style.css">
 <body>
     <!--========NAVBAR====-->
     <nav class="navbar">
@@ -18,11 +19,20 @@
                 <a href="#education">Educacion</a>
                 <a href="#contact">Contacto</a>
             </div>
-            <div>
-                <button>🌙</button>
-                <button>☰ Menú</button>
+            <div class="nav-btns">
+                <button id="modeBtn" class="btn ghost" aria-label="Activar modo oscuro">🌙</button>
+                <button id="menuBtn" class="btn" aria-label="Abrir menú">☰ Menú</button>
+            </div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="#home">Inicio</a>
+                <a href="#about">Sobre mi</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#projects">Proyectos</a>
+                <a href="#education">Educacion</a>
+                <a href="#contact">Contacto</a>
             </div>
         </div>
     </nav>
+    <script src="app.js"></script>
 </body>
 </html>
