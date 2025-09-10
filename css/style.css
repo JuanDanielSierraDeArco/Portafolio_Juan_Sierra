@@ -136,6 +136,81 @@ img {
   pointer-events: auto;       /* ahora sí se puede hacer clic */
 }
 
+/* Estilos para home */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 80%;
+  background: linear-gradient(45deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 55%, #3aa45b) 60%);
+  clip-path: polygon(100% 0, 100% 100%, 30% 100%, 0 25%, 0 0);
+  opacity: .15;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 32px;
+  padding: 80px 0;
+}
+.kicker {
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: .04em;
+  margin-bottom: 16px;
+}
+.title {
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.1;
+  margin: 8px 0 12px;
+}
+.lead {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 60ch;
+  margin-bottom: 24px;
+}
+.hero-cta{
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.avatar-wrap {
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+}
+.avatar {
+  width: min(400px, 60vw);
+  aspect-ratio: .9/1;       /* mantiene proporción cuadrada */
+  background: transparent;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.avatar img {
+  width: 90%;
+  height: 100%;
+  bottom: 15px;
+  position: relative;
+  object-fit: cover;
+  display: block;      
+}
+
+
+
+
+
+
 /* ====== Desktop y tablet grande (≥895px) ====== */
 @media (min-width: 895px){
   #menuBtn {display: none;}

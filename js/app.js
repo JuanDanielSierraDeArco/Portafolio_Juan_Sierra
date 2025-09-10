@@ -84,46 +84,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Definición de partículas
 particles: {
-  number: { value: 20, density: { enable: true, area: 800 } },
+  number: { value: 15, density: { enable: true, area: 800 } },
   color: { value: getCssVar("--accent") },
   links: {
     enable: true,
     color: getCssVar("--accent-2"),
     distance: 150,
     opacity: 0.4,
-    width: 1
+    width: 2
   },
   move: {
     enable: true,
-    speed: 2,
+    speed: 1,
     direction: "none",
     outModes: { default: "bounce" }
   },
 shape: {
   type: "char", // usamos caracteres
   character: [
-    { value: "JavaScript", style: "normal", weight: "bold", font: "Verdana" },
-    { value: "HTML", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "JavaScript", style: "normal", weight: "bold", font: "Verdana"},
+    { value: "HTML", style: "normal", weight: "bold", font: "Verdana"},
     { value: "CSS", style: "normal", weight: "bold", font: "Verdana" },
     { value: "Python", style: "normal", weight: "bold", font: "Verdana" },
     { value: "C++", style: "normal", weight: "bold", font: "Verdana" },
-    { value: "Java", style: "normal", weight: "bold", font: "Verdana" }
+    { value: "Java", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "C#", style: "normal", weight: "bold", font: "Verdana" }, 
+    { value: "Ruby", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "PHP", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Swift", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "React", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Node.js", style: "normal", weight: "bold", font: "Verdana" }
   ],
 },
 size: {
-  value: { min: 1500, max: 160 } // ajusta tamaño de texto
+  value: { min: 150, max: 300 } // ajusta tamaño de texto
 },
 color: {
-  value: ["#f7df1e", "#e34f26", "#2965f1", "#3776ab", "#00599C", "#b07219"] 
+  value: ["#f7df1e", "#e34f26", "#2965f1", "#3776ab", "#00599C", "#b07219", ] 
   // Colores típicos: JS (amarillo), HTML (naranja), CSS (azul), Python (azul), C++ (azul oscuro), Java (marrón)
 },
   opacity: {
-    value: 1.8,
-    animation: { enable: true, speed: 1, minimumValue: 0.3 }
+    value: 0.4,
+    animation: { enable: true, speed: 1, minimumValue: 0.9 }
   },
   size: {
-    value: { min: 3, max: 7 },
-    animation: { enable: true, speed: 2, minimumValue: 2 }
+    value: { min: 5, max: 20 },
+    animation: { enable: true, speed: 2, minimumValue: 8 }
   }
 }
 

@@ -1,203 +1,185 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tu Nombre – Portafolio</title>
-  <meta name="description" content="Portafolio profesional de Tu Nombre, desarrollador web."/>
-  <style>
-    /* ===== Variables ===== */
-    :root {
-      --bg:#0b0f0c; --surface:#111712; --text:#e9f0ea;
-      --muted:#aeb8b1; --accent:#1f8a34; --card:#141a15;
-      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:18px;
+// app.js
+// Versión robusta y comentada para manejar:
+// - Tema claro/oscuro (guardado en localStorage)
+// - Inicialización y recarga de tsParticles según el tema
+// - Menú móvil
+// - Protección contra errores (elementos que no existen, librería no cargada, etc.)
+
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Referencias al DOM --------------------------------------------------
+  // "root" apunta a <html> para cambiar variables CSS (clase .light)
+  const root = document.documentElement;
+
+  // Botón que alterna tema (asegúrate que exista en el HTML: id="modeBtn")
+  const modeBtn = document.getElementById("modeBtn");
+
+  // Botones/menu móvil (ids deben existir en HTML)
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  // Clave para almacenar el tema en localStorage
+  const THEME_KEY = "juan-theme";
+
+  // --- Recuperar tema guardado (si existe) -------------------------------
+  // Si el usuario ya escogió tema antes, aplicamos la clase .light
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "light") {
+    root.classList.add("light");
+    if (modeBtn) modeBtn.textContent = "☀️"; // icono del sol si está en claro
+  } else {
+    // Si no hay valor guardado, mantenemos el tema por defecto (oscuro).
+    // Opcional: podrías usar prefers-color-scheme para detectar preferencia del OS.
+  }
+
+  // --- Función auxiliar: leer variables CSS ------------------------------
+  // Devuelve el valor de la variable CSS --nombre (ej: --accent)
+  function getCssVar(name) {
+    // getComputedStyle sobre documentElement para leer las variables definidas en :root o .light
+    return getComputedStyle(root).getPropertyValue(name).trim();
+  }
+
+  // --- Generar configuración de tsParticles según el tema ---------------
+  // Aquí definimos las opciones que pasaremos a tsParticles.load(...)
+  function getParticlesConfig() {
+    // Detectamos si el tema actual es claro
+    const isLight = root.classList.contains("light");
+
+    // Elegimos colores / cantidad / velocidad en función del tema
+    const particleColor = isLight ? getCssVar("--accent-2") : getCssVar("--accent");
+    const linkColor = isLight ? getCssVar("--muted") : getCssVar("--accent-2");
+    const number = isLight ? 60 : 80;        // más partículas en modo oscuro
+    const speed = isLight ? 1 : 1.5;         // velocidad ligeramente mayor en oscuro
+
+    // Devolvemos el objeto completo de configuración. Comentarios internos explican cada bloque.
+    return {
+      // fullScreen hace que el canvas ocupe toda la pantalla; zIndex asegura que quede detrás
+      fullScreen: { enable: true, zIndex: -1 },
+
+      // color de fondo (usamos la variable CSS --bg)
+      background: { color: getCssVar("--bg") },
+
+      // límite de frames por segundo (opcional para rendimiento)
+      fpsLimit: 60,
+
+      // Interactividad (hover, click, resize)
+      interactivity: {
+        events: {
+          // onHover: al pasar el ratón las partículas se repelen (modo "repulse")
+          onHover: { enable: true, mode: "repulse" },
+
+          // onClick: al hacer clic se "empujan" nuevas partículas (modo "push")
+          onClick: { enable: true, mode: "push" },
+
+          // resize: actualiza el canvas al redimensionar la ventana
+          resize: true
+        },
+        modes: {
+          // Configuración del modo "repulse"
+          repulse: { distance: 120, duration: 0.4 },
+
+          // Configuración del modo "push" (al hacer clic)
+          push: { quantity: 4 }
+        }
+      },
+
+      // Definición de partículas
+particles: {
+  number: { value: 30, density: { enable: true, area: 800 } },
+  color: { value: getCssVar("--accent") },
+  links: {
+    enable: true,
+    color: getCssVar("--accent-2"),
+    distance: 150,
+    opacity: 0.4,
+    width: 1
+  },
+  move: {
+    enable: true,
+    speed: 1.5,
+    direction: "none",
+    outModes: { default: "bounce" }
+  },
+shape: {
+  type: "char", // usamos caracteres
+  character: [
+    { value: "JavaScript", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "HTML", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "CSS", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Python", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "C++", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Java", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "C#", style: "normal", weight: "bold", font: "Verdana" }, 
+    { value: "Ruby", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "PHP", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Swift", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "React", style: "normal", weight: "bold", font: "Verdana" },
+    { value: "Node.js", style: "normal", weight: "bold", font: "Verdana" }
+  ],
+},
+size: {
+  value: { min: 150, max: 300 } // ajusta tamaño de texto
+},
+color: {
+  value: ["#f7df1e", "#e34f26", "#2965f1", "#3776ab", "#00599C", "#b07219", ] 
+  // Colores típicos: JS (amarillo), HTML (naranja), CSS (azul), Python (azul), C++ (azul oscuro), Java (marrón)
+},
+  opacity: {
+    value: 0.8,
+    animation: { enable: true, speed: 1, minimumValue: 0.3 }
+  },
+  size: {
+    value: { min: 5, max: 20 },
+    animation: { enable: true, speed: 2, minimumValue: 8 }
+  }
+}
+
+    };
+  }
+
+  // --- Cargar/recargar partículas ---------------------------------------
+  function loadParticles() {
+    // Protección: comprobar que la librería tsParticles se haya cargado
+    if (typeof tsParticles === "undefined") {
+      console.error("tsParticles no está cargado. Asegúrate de incluir la librería antes de app.js");
+      return;
     }
-    body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);}
-    a{color:inherit;text-decoration:none;}
-    img{max-width:100%;display:block;}
-    .container{max-width:1100px;margin:auto;padding:0 24px;}
-    section{padding:70px 0;}
-    .section-title{font-size:clamp(24px,3vw,34px);margin-bottom:24px;}
 
-    /* Navbar */
-    nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.1);}
-    .nav-inner{display:flex;justify-content:space-between;align-items:center;height:64px;}
-    .nav-links{display:flex;gap:20px;}
-    .nav-links a:hover{color:var(--accent);}
+    // Cargamos la configuración en el contenedor con id "tsparticles"
+    // tsParticles.load(referenciaHTMLid, opciones)
+    tsParticles.load("tsparticles", getParticlesConfig());
+  }
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:32px;padding:80px 0;}
-    .title{font-size:clamp(32px,4vw,48px);}
-    .lead{color:var(--muted);max-width:60ch;}
-    .btn{padding:12px 18px;border-radius:999px;border:none;cursor:pointer;
-      background:var(--accent);color:white;font-weight:600;}
-    .btn.ghost{background:transparent;border:1px solid var(--accent);color:var(--accent);}
-    .avatar{width:280px;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:var(--shadow);margin:auto;}
+  // Inicializamos al cargar la página
+  loadParticles();
 
-    /* Habilidades */
-    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;}
-    .skill{background:var(--card);padding:16px;border-radius:var(--radius);text-align:center;}
+  // --- Control del botón de tema ----------------------------------------
+  if (modeBtn) {
+    modeBtn.addEventListener("click", () => {
+      // Alterna la clase .light en <html>
+      root.classList.toggle("light");
 
-    /* Proyectos */
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
-    .card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
-    .card img{height:160px;object-fit:cover;}
-    .card-body{padding:18px;}
+      // Actualiza icono y localStorage
+      const isLight = root.classList.contains("light");
+      localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
+      modeBtn.textContent = isLight ? "☀️" : "🌙";
 
-    /* Línea de tiempo */
-    .timeline{border-left:2px solid rgba(255,255,255,.2);padding-left:18px;display:grid;gap:18px;}
-    .t-item{position:relative;}
-    .t-item::before{content:"";position:absolute;left:-11px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent);}
+      // Recargamos partículas para que tomen los nuevos colores/valores
+      loadParticles();
+    });
+  } else {
+    // Mensaje útil para depuración si el button no existe
+    console.warn("No se encontró #modeBtn en el DOM.");
+  }
 
-    /* Contacto */
-    form{display:grid;gap:12px;}
-    input,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);
-      background:var(--surface);color:var(--text);}
-    textarea{min-height:120px;resize:vertical;}
+  // --- Menú móvil -------------------------------------------------------
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => mobileMenu.classList.toggle("active"));
 
-    /* Footer */
-    footer{padding:24px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.1);}
-
-    /* Animación scroll */
-    .reveal{opacity:0;transform:translateY(20px);transition:.6s ease;}
-    .reveal.visible{opacity:1;transform:none;}
-  </style>
-</head>
-<body>
-  <!-- NAVBAR -->
-  <nav>
-    <div class="container nav-inner">
-      <strong>TuNombre</strong>
-      <div class="nav-links">
-        <a href="#home">Inicio</a>
-        <a href="#about">Sobre mí</a>
-        <a href="#skills">Habilidades</a>
-        <a href="#projects">Proyectos</a>
-        <a href="#experience">Experiencia</a>
-        <a href="#contact">Contacto</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="home" class="hero container">
-    <div>
-      <h1 class="title">Hola 👋 soy <span style="color:var(--accent)">Tu Nombre</span></h1>
-      <p class="lead">Desarrollador web especializado en <strong>frontend y backend</strong>. Me apasiona crear experiencias digitales modernas.</p>
-      <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-        <a class="btn" href="#projects">Ver proyectos</a>
-        <a class="btn ghost" href="CV_TuNombre.pdf" download>Descargar CV</a>
-      </div>
-    </div>
-    <div class="avatar">
-      <img src="https://via.placeholder.com/280" alt="Tu foto">
-    </div>
-  </header>
-
-  <!-- SOBRE MÍ -->
-  <section id="about">
-    <div class="container reveal">
-      <h2 class="section-title">Sobre mí</h2>
-      <p class="lead">Soy un apasionado del desarrollo web con experiencia en <b>JavaScript, React, Node.js</b> y diseño de interfaces accesibles. Me motiva aprender constantemente y afrontar nuevos retos tecnológicos.</p>
-    </div>
-  </section>
-
-  <!-- HABILIDADES -->
-  <section id="skills">
-    <div class="container reveal">
-      <h2 class="section-title">Habilidades</h2>
-      <div class="skills">
-        <div class="skill">HTML / CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">React</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">Git & GitHub</div>
-        <div class="skill">SQL / MongoDB</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROYECTOS -->
-  <section id="projects">
-    <div class="container reveal">
-      <h2 class="section-title">Proyectos</h2>
-      <div class="projects">
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="Proyecto 1">
-          <div class="card-body">
-            <h3>Dashboard de Ventas</h3>
-            <p>Aplicación con gráficos en tiempo real usando React + Node.</p>
-            <a class="btn" href="#">Demo</a>
-          </div>
-        </article>
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Proyecto 2">
-          <div class="card-body">
-            <h3>Portafolio Personal</h3>
-            <p>Plantilla moderna y responsive en HTML y CSS.</p>
-            <a class="btn" href="#">Ver</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCIA -->
-  <section id="experience">
-    <div class="container reveal">
-      <h2 class="section-title">Experiencia & Educación</h2>
-      <div class="timeline">
-        <div class="t-item">
-          <h3>Desarrollador Web Freelance</h3>
-          <p class="lead">2021 – Actualidad · Creación de sitios corporativos y dashboards.</p>
-        </div>
-        <div class="t-item">
-          <h3>Certificación React Avanzado</h3>
-          <p class="lead">2023 · Estado global, testing y optimización.</p>
-        </div>
-        <div class="t-item">
-          <h3>Ingeniería Informática</h3>
-          <p class="lead">2017 – 2021 · Universidad XYZ.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contact">
-    <div class="container reveal">
-      <h2 class="section-title">Contacto</h2>
-      <form onsubmit="sendMessage(event)">
-        <input type="text" name="name" placeholder="Tu nombre" required>
-        <input type="email" name="email" placeholder="Tu email" required>
-        <textarea name="message" placeholder="Escribe tu mensaje..." required></textarea>
-        <button class="btn" type="submit">Enviar</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © <span id="year"></span> Tu Nombre · Todos los derechos reservados
-  </footer>
-
-  <script>
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Animaciones scroll
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold:.2 });
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-    // Formulario simulado
-    function sendMessage(e){
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      alert(`¡Gracias ${data.name}! Me pondré en contacto a ${data.email}.`);
-      e.target.reset();
-    }
-  </script>
-</body>
-</html>
+    // Cerramos el menú cuando se pulsa uno de los enlaces
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => mobileMenu.classList.remove("active"));
+    });
+  } else {
+    console.warn("No se encontró #menuBtn o #mobileMenu en el DOM.");
+  }
+});
