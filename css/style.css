@@ -6,6 +6,7 @@
   --accent: #007bff;    /* azul eléctrico */
   --accent-2: #00d1b2;  /* verde agua sutil */
   --card: #1f1f1f;      
+  --accent-3: #a1a1a1;  /* verde agua sutil */
   --shadow: 0 10px 30px rgba(0,0,0,.4);
   --radius: 18px;
 }
@@ -18,6 +19,7 @@
   --muted: #6b7a8c;     /* gris azulado medio para subtítulos */
   --accent: #2d8cff;    /* azul brillante (se mantiene igual) */
   --accent-2: #ffb400;  /* dorado cálido (igual que en oscuro) */
+  --accent-3: #bcbde9;  /* verde agua sutil */
   --card: #ffffff;      
   --shadow: 0 10px 25px rgba(0, 0, 0, .1);
 }
@@ -130,7 +132,7 @@ img {
 
 /* Estado visible */
 .mobile-menu.active {
-    display: block;
+  display: block;
   transform: translateY(0);   /* se desliza hacia abajo */
   opacity: 1;                 /* aparece con fade */
   pointer-events: auto;       /* ahora sí se puede hacer clic */
@@ -140,6 +142,7 @@ img {
 .hero {
     position: relative;
     overflow: hidden;
+    height: 80vh;
 }
 .hero::before {
   content: "";
@@ -174,7 +177,14 @@ img {
   line-height: 1.6;
   max-width: 60ch;
   margin-bottom: 24px;
+  text-align: justify;
 }
+
+.lead span {
+  font-weight: bold;
+  color: var(--accent); /* o el color que prefieras */
+}
+
 .hero-cta{
   margin-top: 22px;
   display: flex;
@@ -187,14 +197,14 @@ img {
   align-items: center;     /* centra verticalmente */
 }
 .avatar {
-  width: min(400px, 60vw);
+  width: min(350px, 50vw);
   aspect-ratio: .9/1;       /* mantiene proporción cuadrada */
-  background: transparent;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
   display: grid;
   place-items: center;
   position: relative;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 55% 45% 48% 52% / 100% 0% 100% 0%   ;
 }
 
 .avatar img {
@@ -203,7 +213,8 @@ img {
   bottom: 15px;
   position: relative;
   object-fit: cover;
-  display: block;      
+  display: block;
+  transform: rotate(15deg);
 }
 
 
