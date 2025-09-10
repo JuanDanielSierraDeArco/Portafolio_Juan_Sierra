@@ -142,7 +142,6 @@ img {
 .hero {
     position: relative;
     overflow: hidden;
-    height: 80vh;
 }
 .hero::before {
   content: "";
@@ -175,7 +174,6 @@ img {
   color: var(--muted);
   font-size: 18px;
   line-height: 1.6;
-  max-width: 60ch;
   margin-bottom: 24px;
   text-align: justify;
 }
@@ -188,8 +186,9 @@ img {
 .hero-cta{
   margin-top: 22px;
   display: flex;
-  gap: 12px;
+  gap: 20px;
   flex-wrap: wrap;
+  justify-content: center; /* centra horizontalmente */
 }
 .avatar-wrap {
   display: flex;
@@ -198,7 +197,7 @@ img {
 }
 .avatar {
   width: min(350px, 50vw);
-  height: 350px;
+  height: min(350px, 50vw);
   min-height: 250px;
   aspect-ratio: .9/1;       /* mantiene proporción cuadrada */
   background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
@@ -220,6 +219,7 @@ img {
 }
 .hero-content {
   padding: 0 15px;
+  align-items: center;
   z-index: 1;  Asegura que el contenido esté por encima del fondo decorativo */
 }
 
@@ -248,8 +248,12 @@ img {
     text-align: center;
     order: 3;
   }
-  .title{
+  .lead.title{
+    text-align: justify
+  }
+  .hero-content {
     text-align: center;
+    align-items: center;
   }
   .nav-links { display: none; }            /* ocultamos enlaces */
   .menu-btn {
