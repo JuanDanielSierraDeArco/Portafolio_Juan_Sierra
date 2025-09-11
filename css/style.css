@@ -246,7 +246,47 @@ img {
   font-weight: bold;
   color: var(--accent); /* o el color que prefieras */
 }
+/* ====== HABILIDADES ======*/
+.skills-section {
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--accent) 6%, transparent) 60%, transparent);
+}
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 40px 0;
+}
+.skill {
+  display: flex;              /* usamos flexbox */
+  flex-direction: column;     /* apila imagen y texto en columna */
+  align-items: center;        /* centra en horizontal */
+  justify-content: center;    /* centra en vertical */
+  text-align: center;         /* asegura que el texto esté centrado */
+  padding: 12px;
+}
 
+.skill:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.skill img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease;
+}
+
+.skill img:hover {
+  transform: scale(1.1);
+}
+
+.skill p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 800;
+  text-align: center;
+}
 
 
 
