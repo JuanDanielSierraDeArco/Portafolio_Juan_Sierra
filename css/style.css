@@ -227,7 +227,7 @@ img {
 
 /* ====== Desktop y tablet grande (≥895px) ====== */
 
-@media (min-width: 895px) {
+@media screen and (min-width: 895px) {
   #menuBtn {
     display: none;
   }
@@ -238,7 +238,7 @@ img {
 }
 
 /* ====== Tablet pequeña y móviles (≤89px) ====== */
-@media (max-width: 894px){
+@media screen and (max-width: 894px) {
   .avatar-wrap {
     order: -1; /* mueve la imagen arriba */
     margin-bottom: 24px;
