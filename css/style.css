@@ -220,16 +220,19 @@ img {
 .hero-content {
   padding: 0 15px;
   align-items: center;
-  z-index: 1;  Asegura que el contenido esté por encima del fondo decorativo */
+  z-index: 1;  /*Asegura que el contenido esté por encima del fondo decorativo */
 }
 
 
 
 /* ====== Desktop y tablet grande (≥895px) ====== */
 
-@media (min-width: 895px){
-  #menuBtn {display: none;}
-  .nav-links { display: flex; gap: 20px; } /* mostramos enlaces */
+@media (min-width: 895px) {
+  #menuBtn {
+    display: none;
+  }
+  .nav-links {
+    display: flex; gap: 20px; } /* mostramos enlaces */
   .menu-btn { display: none; }             /* ocultamos botón ☰ */
   .mobile-menu { display: none !important; } /* ocultamos menú mobile */
 }
