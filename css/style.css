@@ -220,9 +220,42 @@ img {
   align-items: center;
   z-index: 1;  /*Asegura que el contenido esté por encima del fondo decorativo */
 }
+.section-title {
+  font-size: clamp(28px, 6vw, 40px);
+  margin-bottom: 16px;
+  text-align: left;
+  position: relative;  /* necesario para el pseudo-elemento */
+}
+.section-title::after {
+  content: "";
+  background: var(--accent);
+  border-radius: 2px;
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  bottom: -8px;
+  left: 0;
+}
+.muted {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: justify;
+}
+.muted span {
+  font-weight: bold;
+  color: var(--accent); /* o el color que prefieras */
+}
 
 
 
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible{opacity:1; transform:none}
 /* ====== Desktop y tablet grande (≥895px) ====== */
 
 @media screen and (min-width: 895px) {
