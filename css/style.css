@@ -196,9 +196,8 @@ img {
   align-items: center;     /* centra verticalmente */
 }
 .avatar {
-  width: clamp(150px, 50vw, 300px);
-  /* height: clamp(150px, 50vh, 300px); */
-  aspect-ratio: 1/1;       /* mantiene proporción cuadrada */
+  width: clamp(300px, 50vw, 400px);
+  aspect-ratio: 1 / 1;       /* mantiene proporción cuadrada */
   background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
   display: grid;
   place-items: center;
