@@ -155,9 +155,33 @@
             <div class="container reveal">
                 <h2 class="section-title">Contacto</h2>
                 <div class="contact">
-                    <form action="">
-                        
+                    <form  class="card" onsubmit="sendMessage(event)">
+                        <div class="card-body">
+                            <div class="field">
+                                <label for="name">Nombre</label>
+                                <input id="name" name="name" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="field style-form">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" placeholder="tucorreo@email.com" required>
+                            </div>
+                            <div class="field style-form">
+                                <label for="message">Mensaje</label>
+                                <textarea name="message" id="message" placeholder="Cuéntame sobre tu proyecto" required></textarea>
+                            </div>
+                            <div class="style-btn">
+                                <button class="btn" type="submit">Enviar</button>
+                                <a class="btn ghost" href="mailto:juandanieljdsda10@gmail.com">Abrir correo</a>
+                            </div>
+                        </div>
                     </form>
+                    <div>
+                        <p class="muted">¿Te interesa colaborar? Escríbeme y responderé lo antes posible. También puedes encontrarme en:</p>
+                        <div class="social-links">
+                            <a class="btn ghost" target="_blank" href="https://www.linkedin.com/in/juan-daniel-sierra-de-arco-b872b9127">LinkedIn</a>
+                            <a class="btn ghost" target="_blank" href="https://github.com/JuanDanielSierraDeArco">GitHub</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
