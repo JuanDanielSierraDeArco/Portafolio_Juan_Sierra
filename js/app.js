@@ -188,3 +188,21 @@ const observer = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: .15 });
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+
+// Envio de formulario
+
+function sendMessage(e) {
+  e.preventDefault();
+  const form = e.target;
+
+  emailjs.sendForm('service_t9v8fkj', 'template_1gcc2w9', form, '9QUrkBRou0gg-STAW')
+    .then((response) => {
+      console.log("✅ Mensaje enviado:", response);
+      alert("¡Mensaje enviado con éxito! 🎉");
+      form.reset();
+    }, (error) => {
+      console.error("❌ Error al enviar:", error);
+      alert("Error al enviar: " + error.text);
+    });
+}

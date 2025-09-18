@@ -8,6 +8,7 @@
 </head>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <body>
     <!--========NAVBAR====-->
@@ -194,7 +195,13 @@
         </footer>
     </footer>
     </main>
-    <script src="js/app.js"></script>
+<script>
+  (function(){
+    emailjs.init("9QUrkBRou0gg-STAW"); // tu Public Key
+  })();
+</script>
+<script src="js/app.js"></script>
+
 </body>
 
 </html>

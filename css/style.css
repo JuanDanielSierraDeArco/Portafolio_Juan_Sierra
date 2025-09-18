@@ -317,6 +317,20 @@ textarea {
   min-height: 130px;
   resize: vertical;
 }
+.card-body{
+  padding: 18px;
+}
+.card {
+  border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/*
+
+*/
 
 
 

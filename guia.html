@@ -342,13 +342,18 @@
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
     // Envío simulado del formulario
-    function sendMessage(e){
-      e.preventDefault();
-      const form = e.target;
-      const data = Object.fromEntries(new FormData(form).entries());
-      alert(`¡Gracias, ${data.name}! Me pondré en contacto a ${data.email}.`);
+function sendMessage(e) {
+  e.preventDefault(); 
+  const form = e.target;
+
+  emailjs.sendForm('service_qd3kbcq', 'template_1gcc2w9', form)
+    .then(() => {
+      alert("¡Mensaje enviado con éxito! 🎉");
       form.reset();
-    }
+    }, (error) => {
+      alert("Error al enviar: " + error.text);
+    });
+}
   </script>
 </body>
 </html>
