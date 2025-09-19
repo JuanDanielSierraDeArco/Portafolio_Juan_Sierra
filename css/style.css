@@ -327,13 +327,101 @@ textarea {
   box-shadow: var(--shadow);
   overflow: hidden;
 }
+/* proyectos */
 
-/*
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
 
-*/
+.card-article {
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card-article img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+.card-article h3 {
+  margin: 0 0 6px;
+}
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+}
+.tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  color: var(--text);
+  background: color-mix(in oklab, var(--accent) 10%, transparent)
+}
 
 
 
+
+.tag {
+  position: relative;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 14px;
+  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Logo emergente */
+.tag::after {
+  content: "";
+  position: absolute;
+  top: -50px; /* lo coloca arriba de la etiqueta */
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Aparece al hacer hover */
+.tag:hover::after {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Logos por tecnología */
+.tag.html::after {
+  background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg");
+}
+
+.tag.css::after {
+  background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg");
+}
+
+.tag.js::after {
+  background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg");
+}
 
 
 
