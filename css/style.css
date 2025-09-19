@@ -309,6 +309,7 @@ img {
   margin-top: 16px;
   display: flex;
   gap: 10px;
+  justify-content: center;
   align-items: center;
 }
 .contact {
@@ -500,10 +501,23 @@ textarea {
     left: 0;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 535px) {
   .contact {
     grid-template-columns: 1fr; /* una columna */
     justify-content: center;
     align-items: ;
   }
+  .style-btn {
+    justify-content: center; /* centra los botones */
+  }
+}
+
+/* Corrige el solapamiento con la navbar sticky */
+#home,
+#about,
+#skills,
+#projects,
+#education,
+#contact {
+  scroll-margin-top: 80px; /* ajusta según la altura de tu navbar (64px + un poco extra) */
 }

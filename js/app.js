@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Definición de partículas
 particles: {
-  number: { value: 15, density: { enable: true, area: 800 } },
+  number: { value: 25, density: { enable: false }, limit: 50},
   color: { value: getCssVar("--accent") },
   links: {
     enable: true,
