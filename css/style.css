@@ -427,20 +427,6 @@ textarea {
   background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg");
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -512,4 +498,12 @@ textarea {
     z-index: -1;
     top: 0;
     left: 0;
+}
+
+@media screen and (max-width: 430px) {
+  .contact {
+    grid-template-columns: 1fr; /* una columna */
+    justify-content: center;
+    align-items: ;
+  }
 }
