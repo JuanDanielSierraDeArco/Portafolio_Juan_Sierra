@@ -81,12 +81,27 @@ img {
     gap: 20px;
 }
 .nav-links a {
-    opacity:.9
+  position: relative;
+  padding: 4px 0;
 }
-.nav-links a:hover{
-    opacity: 1;
-    color: var(--accent);
+.nav-links a::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.6s ease-in-out;
+  transform: translateX(-50%);
 }
+.nav-links a:hover::after {
+  width: 100%; /* la línea se expande en hover */
+}
+
+
+
+
 /* ====== Botones ====== */
 .btn {
     display: inline-flex;
@@ -180,7 +195,7 @@ img {
 
 .lead span {
   font-weight: bold;
-  color: var(--accent); /* o el color que prefieras */
+  color: color-mix(in oklab, var(--accent) 40%, var(--text) 60%);
 }
 
 .hero-cta{
@@ -243,7 +258,7 @@ img {
 }
 .muted span {
   font-weight: bold;
-  color: var(--accent); /* o el color que prefieras */
+  color: color-mix(in oklab, var(--accent) 40%, var(--text) 60%);
 }
 /* ====== HABILIDADES ======*/
 .skills-section {
@@ -361,17 +376,6 @@ textarea {
   flex-wrap: wrap;
   margin: 10px 0 14px;
 }
-.tag {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 14px;
-  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-  color: var(--text);
-  background: color-mix(in oklab, var(--accent) 10%, transparent)
-}
-
-
-
 
 .tag {
   position: relative;
