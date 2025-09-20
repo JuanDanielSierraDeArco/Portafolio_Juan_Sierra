@@ -226,3 +226,39 @@ function sendMessage(e) {
 //   }
 // });
 // console.log(document.querySelector('.avatar').getBoundingClientRect());
+// Obtiene el elemento que contiene la frase
+document.addEventListener('DOMContentLoaded', () => {
+  const title = document.getElementById('elegant-title');
+
+  // 1. Ocultamos el título para evitar que se vea antes de la animación
+  title.style.visibility = 'hidden';
+
+  // 2. Obtenemos el texto y lo dividimos en un array de letras
+  const textContent = title.textContent.trim();
+  const letters = textContent.split('');
+
+  // 3. Limpiamos el contenido original del <h1>
+  title.innerHTML = '';
+
+  // 4. Creamos un <span> por cada letra y lo añadimos al título
+  letters.forEach(letter => {
+    const span = document.createElement('span');
+    span.textContent = letter === ' ' ? '\u00A0' : letter; // Usa un espacio no divisible para los espacios
+    title.appendChild(span);
+  });
+
+  // 5. Hacemos que el título sea visible de nuevo
+  title.style.visibility = 'visible';
+
+  // 6. Animación con GSAP
+  gsap.from(title.querySelectorAll('span'), {
+    duration: 1.5,
+    y: 50,
+    opacity: 0,
+    ease: "power2.out",
+    stagger: 0.05,
+    repeat: -1,
+    yoyo: true,
+    repeatDelay: 2,
+  });
+});
