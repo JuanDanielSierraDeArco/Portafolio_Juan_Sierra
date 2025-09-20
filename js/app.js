@@ -184,9 +184,21 @@ color: {
   }
 });
 
+// Efecto de revelado al hacer scroll
 const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: .15 });
+      entries.forEach(entry=>{ 
+        //Si el elemento es visible en la pantalla.
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+        //Si el elemento no es visible en la pantalla.
+        else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.15 }); // Se activa cuando el 15% del elemento es visible
+    
+// Observar todos los elementos con la clase 'reveal'
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 

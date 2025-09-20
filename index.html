@@ -56,7 +56,7 @@
                         <span>desarrollo tecnológico</span> y fortalezcan mis <span>competencias profesionales</span>.
                     </article>
                     <div class="hero-cta">
-                        <a href="#projects" class="btn">Ver Proyectos</a>
+                        <a href="#projects" class="btn" target="_parent">Ver Proyectos</a>
                         <a href="https://drive.google.com/file/d/1_NG4W-8sDZcQQLlgiPGRsOs810ZtkwlO/view?usp=drive_link" target="_blank" class="btn ghost" download>Ver CV</a>
                     </div>
                 </aside>
@@ -69,7 +69,7 @@
         </section>
         <!-- ====== SOBRE MÍ ====== -->
         <section id="about">
-            <div class="container reveal">
+            <div class="container reveal fade-left">
                 <h2 class="section-title">Sobre mí</h2>
                 <p class="muted">
                     Me apasiona <span>resolver problemas con código</span> y <span>diseñar soluciones elegantes</span>.
@@ -77,7 +77,7 @@
                     <span>frontend</span>,
                     además de conocimientos en <span>Python</span> y <span>C</span>, así como nociones básicas de
                     <span>SQL</span> y <span>Django</span>.
-                    Actualmente estoy ampliando mi formación en <span>React</span>, con el objetivo de desarrollar
+                    Actualmente estoy ampliando mi formación en <span>Angular</span>, con el objetivo de desarrollar
                     proyectos innovadores y de mayor alcance.
                     Mi visión es <span>convertirme en un desarrollador reconocido</span> por la calidad de mis
                     soluciones,
@@ -94,7 +94,7 @@
         </section>
         <!-- ====== HABILIDADES ====== -->
         <section class="skills-section" id="skills">
-            <div class="container reveal">
+            <div class="container reveal fade-right">
                 <h2 class="section-title">Habilidades</h2>
                 <div class="skills">
 
@@ -122,9 +122,9 @@
                     </div>
 
                     <div class="skill">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
-                            alt="React">
-                        <p>React (básico)</p>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                            alt="Angular">
+                        <p>Angular (básico)</p>
                     </div>
 
 
@@ -162,7 +162,7 @@
         </section>
         <!-- ====== PROYECTOS ====== -->
         <section id="projects">
-            <div class="container reveal">
+            <div class="container reveal fade-left">
                 <h2 class="section-title">Proyectos</h2>
                 <div class="projects">
                     <article class="card-article">
@@ -182,7 +182,7 @@
                                 <span class="tag js">JavaScript</span>
                             </div>
                             <div class="card-actions">
-                                <a href="#" class="btn" target="_blank">Demo</a>
+                                <a href="#" class="btn" target="_parent">Demo</a>
                                 <a href="https://github.com/JuanDanielSierraDeArco/Portafolio_Juan_Sierra" class="btn ghost" target="_blank">Código</a>
                             </div>
                         </div>
@@ -190,8 +190,33 @@
                 </div>
             </div>
         </section>
+        <section id="timeline" class="container reveal fade-left">
+            <h2 class="section-title">Educación y Experiencia</h2>
+            <div class="timeline">
+                <div class="t-item">
+                    <h3>Ingeniería Electrónica</h3>
+                    <span class="t-date">2016 - 2023</span>
+                    <p>Universidad Del Magdalena — Formación en circuitos, telecomunicaciones y desarrollo de software.</p>
+                </div>
+                <div class="t-item">
+                    <h3>Desarrollo Frontend</h3>
+                    <span class="t-date">2023 - actualidad</span>
+                    <p>Proyecto intensivo en HTML, CSS, y JavaScript. Experiencia con Git y APIs para construir aplicaciones web interactivas y responsivas.</p>
+                </div>
+                <div class="t-item">
+                    <h3>Desarrollador Web Frontend Autodidacta</h3>
+                    <span class="t-date">2022 - Presente</span>
+                    <p>Formación continua en las últimas tendencias y tecnologías de frontend. Enfoque en JavaScript, diseño web y optimización de rendimiento.</p>
+                </div>
+                <div class="t-item">
+                    <h3>Formación en Framework Angular</h3>
+                    <span class="t-date">En curso</span>
+                    <p>Estudio de la arquitectura de Angular, componentes, enrutamiento, servicios y manejo de estado para el desarrollo de aplicaciones web a gran escala.</p>
+                </div>
+            </div>
+        </section>
         <section id="contact">
-            <div class="container reveal">
+            <div class="container reveal fade-right">
                 <h2 class="section-title">Contacto</h2>
                 <div class="contact">
                     <form class="card" onsubmit="sendMessage(event)">
@@ -229,13 +254,25 @@
                 </div>
             </div>
         </section>
-        <footer>
-            <div class="container"
-                style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
-                <small class="muted">© <span id="year"></span> Juan Daniel Sierra. Hecho con ❤ y CSS moderno.</small>
-                <a class="btn ghost" href="#home">Volver arriba ↑</a>
+        <footer class="site-footer">
+            <div class="container footer-container">
+
+                <div class="footer-copyright">
+                    <small>&copy; <span id="year"></span> Juan Daniel Sierra D.A</small>
+                    <small class="muted">Diseñado con ❤ en Santa Marta, Colombia.</small>
+                </div>
+
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/juan-daniel-sierra-de-arco-b872b9127" target="_blank" aria-label="Mi perfil de LinkedIn" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="https://github.com/JuanDanielSierraDeArco" target="_blank" aria-label="Mi perfil de GitHub" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a class="btn ghost" href="#home">Volver arriba ↑</a>
+                </div>
+
             </div>
-        </footer>
         </footer>
     </main>
     <script>

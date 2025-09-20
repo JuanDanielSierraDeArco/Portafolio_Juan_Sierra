@@ -1,27 +1,28 @@
-:root{
-  --bg: #0e0e0e;        /* negro casi puro */
-  --surface: #1a1a1a;   /* gris muy oscuro */
-  --text: #e5e5e5;      /* gris claro */
-  --muted: #a1a1a1;     /* gris medio */
-  --accent: #007bff;    /* azul eléctrico */
-  --accent-2: #00d1b2;  /* verde agua sutil */
-  --card: #1f1f1f;      
-  --accent-3: #a1a1a1;  /* verde agua sutil */
-  --shadow: 0 10px 30px rgba(0,0,0,.4);
-  --radius: 18px;
+/* ====== VARIABLES GLOBALES ====== */
+:root {
+  --bg: #0e0e0e;        /* Fondo principal oscuro */
+  --surface: #1a1a1a;   /* Fondo de tarjetas o secciones */
+  --text: #e5e5e5;      /* Color de texto principal */
+  --muted: #a1a1a1;     /* Texto secundario / gris medio */
+  --accent: #007bff;    /* Color principal de acento (azul) */
+  --accent-2: #00d1b2;  /* Segundo color de acento (verde agua) */
+  --card: #1f1f1f;      /* Fondo de tarjetas */
+  --accent-3: #a1a1a1;  /* Otro color de acento (gris) */
+  --shadow: 0 10px 30px rgba(0,0,0,.4); /* Sombra predeterminada */
+  --radius: 18px;       /* Radio de borde general */
 }
 
 /* ====== MODO CLARO ====== */
-.light{
-  --bg: #f5f9ff;        /* azul muy claro casi blanco */
-  --surface: #ffffff;   /* fondo de tarjetas y secciones */
-  --text: #0d1a26;      /* gris azulado oscuro para buen contraste */
-  --muted: #6b7a8c;     /* gris azulado medio para subtítulos */
-  --accent: #2d8cff;    /* azul brillante (se mantiene igual) */
-  --accent-2: #ffb400;  /* dorado cálido (igual que en oscuro) */
-  --accent-3: #bcbde9;  /* verde agua sutil */
+.light {
+  --bg: #f5f9ff;        /* Fondo claro */
+  --surface: #ffffff;   /* Fondo de tarjetas claro */
+  --text: #0d1a26;      /* Texto oscuro para contraste */
+  --muted: #6b7a8c;     /* Subtítulos / texto secundario */
+  --accent: #2d8cff;    /* Azul brillante */
+  --accent-2: #ffb400;  /* Dorado cálido */
+  --accent-3: #bcbde9;  /* Otro acento */
   --card: #ffffff;      
-  --shadow: 0 10px 25px rgba(0, 0, 0, .1);
+  --shadow: 0 10px 25px rgba(0, 0, 0, .1); /* Sombra más ligera */
 }
 *{
     box-sizing: border-box;
@@ -428,12 +429,6 @@ textarea {
   background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg");
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 0.6s ease-out;
-}
-.reveal.visible{opacity:1; transform:none}
 /* ====== Desktop y tablet grande (≥895px) ====== */
 
 @media screen and (min-width: 895px) {
@@ -520,4 +515,147 @@ textarea {
 #education,
 #contact {
   scroll-margin-top: 80px; /* ajusta según la altura de tu navbar (64px + un poco extra) */
+}
+/* ====== Educación y Experiencia ====== */
+
+/* ====== Timeline ====== */
+.timeline {
+  border-left: 2px solid color-mix(in oklab, var(--muted) 40%, transparent);
+  margin-left: 8px;
+  padding-left: 18px;
+  display: grid;
+  gap: 24px;
+  position: relative;
+}
+
+.t-item {
+  position: relative;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: color-mix(in oklab, var(--card) 85%, transparent);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.t-item:hover {
+  background: color-mix(in oklab, var(--accent) 15%, var(--card));
+  transform: translateX(6px);
+}
+
+/* Punto de cada hito */
+.t-item::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.t-item:hover::before {
+  transform: scale(1.3);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+/* Títulos y fechas */
+.t-item h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.t-date {
+  font-size: 0.9rem;
+  color: color-mix(in oklab, var(--text) 70%, transparent);
+  display: block;
+  margin-bottom: 6px;
+}
+/* ================================== */
+/* ====== EFECTO SCROLL REVEAL ====== */
+/* ================================== */
+
+/* 1. ESTADO INICIAL (OCULTO) */
+.reveal {
+  opacity: 0;
+  /* Efecto por defecto: aparecer desde abajo */
+  transform: translateY(30px); 
+  transition: opacity 1s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Modificador para aparecer desde la izquierda */
+.reveal.fade-left {
+  transform: translateX(-40px);
+}
+
+/* Modificador para aparecer desde la derecha */
+.reveal.fade-right {
+  transform: translateX(40px);
+}
+
+
+/* 2. ESTADO FINAL (VISIBLE) */
+/* Se activa con JavaScript cuando el elemento entra en la pantalla */
+.reveal.visible {
+  opacity: 1;
+  transform: none; /* Resetea cualquier transform (translateX o translateY) a su posición original */
+}
+
+
+/* ================================== */
+/* ====== FOOTER MEJORADO ====== */
+/* ================================== */
+.site-footer {
+  background: var(--surface); /* Un color de fondo sutil */
+  border-top: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+  padding: 2.5rem 0;
+  margin-top: 5rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-copyright {
+  display: flex;
+  flex-direction: column; /* Apila las dos líneas de texto */
+  gap: 0.25rem; /* Pequeño espacio entre ellas */
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espacio entre los iconos y el botón */
+}
+
+.social-icon {
+  color: var(--muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--accent);
+  transform: translateY(-2px); /* Efecto sutil al pasar el ratón */
+}
+
+/* Responsividad para el footer mejorado */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column; /* Apila todo en una columna */
+    gap: 2rem;
+  }
+  .footer-copyright {
+    text-align: center; /* Centra el texto del copyright */
+    order: 2; /* Mueve el copyright debajo de los enlaces */
+  }
+  .footer-links {
+    order: 1; /* Mueve los enlaces arriba */
+  }
 }
