@@ -32,17 +32,20 @@
     box-sizing: border-box; /* incluye padding y border en el width/height */
     margin: 0;
     padding: 0;
-    /*outline: 1px solid red; /* marca todos los elementos */
+    /*outline: 1px solid red;  marca todos los elementos */
 }
 html {
     scroll-behavior: smooth;
-    max-width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: var(--bg);
     color: var(--text);
+    width: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -60,6 +63,14 @@ img {
     max-width: 1100px; /* Limitar ancho del contenedor */
     margin: 0 auto;
     padding: 0 24px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  min-width: 0;
+  align-items: center;
+  gap: 32px;
+  padding: 80px 0;
 }
 
 /* ====== NAVBAR ====== */
@@ -166,7 +177,6 @@ img {
 /* ====== HERO / HOME ====== */
 .hero {
     position: relative;
-    overflow-x: hidden;
 }
 .hero::before {
   content: "";
@@ -180,14 +190,6 @@ img {
   opacity: .15;
   pointer-events: none;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  align-items: center;
-  gap: 32px;
-  padding: 80px 0;
-  overflow: hidden;
-}
 .kicker {
   color: var(--accent);
   font-weight: 800;
@@ -198,6 +200,16 @@ img {
   font-size: clamp(28px, 6vw, 40px);
   line-height: 1.1;
   margin: 8px 0 12px;
+}
+#elegant-title {
+  display: block;
+  max-width: 100%;          /* que nunca exceda el ancho del viewport */
+  text-align: center;       /* centrado */
+  word-break: break-word;   /* por compatibilidad */
+  white-space: normal;      /* permite saltos de línea */
+}
+.greeting {
+  white-space: nowrap; /* nunca se separa */
 }
 .lead {
   color: var(--muted);
@@ -363,6 +375,7 @@ textarea {
 }
 .card {
   border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+  width: 100%;
   border-radius: var(--radius);
   background: var(--card);
   box-shadow: var(--shadow);
@@ -468,24 +481,26 @@ textarea {
 
 /* ====== Tablet pequeña y móviles (≤89px) ====== */
 @media screen and (max-width: 894px) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-areas:
+    "avatar"  
+    "content"
+      "cta";
+    text-align: center;
+    min-width: 0;
+  }
+
+  .hero-content {
+    grid-area: content;
+  }
   .avatar-wrap {
-    order: -1; /* mueve la imagen arriba */
+    grid-area: avatar;
     margin-bottom: 24px;
   }
   .hero-cta {
-    order: 2; /* mueve los botones abajo */
-  }
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-    order: 3;
-  }
-  .lead.title{
-    text-align: justify
-  }
-  .hero-content {
-    text-align: center;
-    align-items: center;
+    grid-area: cta;
   }
   .nav-links { display: none; }            /* ocultamos enlaces */
   .menu-btn {
@@ -525,7 +540,7 @@ textarea {
   .contact {
     grid-template-columns: 1fr; /* una columna */
     justify-content: center;
-    align-items: ;
+    align-items: center;
   }
   .style-btn {
     justify-content: center; /* centra los botones */
