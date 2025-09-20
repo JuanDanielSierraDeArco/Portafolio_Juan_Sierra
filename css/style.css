@@ -176,7 +176,7 @@ img {
   right: 0;
   bottom: 0;
   background: linear-gradient(45deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 55%, #3aa45b) 60%);
-  clip-path: polygon(100% 0, 100% 100%, 30% 100%, 0 25%, 0 0);
+  clip-path: polygon(100% 100%, 0 0, 100% 0);
   opacity: .15;
   pointer-events: none;
 }
