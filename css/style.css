@@ -1,4 +1,6 @@
+/* ================================== */
 /* ====== VARIABLES GLOBALES ====== */
+/* Colores, sombras y radios usados en todo el sitio */
 :root {
   --bg: #0e0e0e;        /* Fondo principal oscuro */
   --surface: #1a1a1a;   /* Fondo de tarjetas o secciones */
@@ -24,50 +26,52 @@
   --card: #ffffff;      
   --shadow: 0 10px 25px rgba(0, 0, 0, .1); /* Sombra más ligera */
 }
+
+/* ====== RESETEOS GENERALES ====== */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* incluye padding y border en el width/height */
+    margin: 0;
+    padding: 0;
+    /*outline: 1px solid red; /* marca todos los elementos */
 }
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 body {
-    margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: var(--bg);
     color: var(--text);
-    overflow-x: hidden;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color: inherit; /* Hereda color de texto */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s ease;
 }
 
 img {
-    max-width: 100%;
-    display: block;
+    max-width: 100%; /* limitar ancho maximo de imagenes */
+    margin: 0 auto; /* centrar horizontalmente */
+    display: block; /* evita espacio debajo de la imagen */
 }
 .container {
-    max-width: 1100px;
+    max-width: 1100px; /* Limitar ancho del contenedor */
     margin: 0 auto;
     padding: 0 24px;
 }
 
-.nav-btns {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
+/* ====== NAVBAR ====== */
 .navbar {
-    position: sticky;
+    position: sticky; /* fija la navbar al hacer scroll */
     top: 0;
-    z-index: 50;
-    backdrop-filter: saturate(160%);
+    z-index: 50;      /* encima de otros elementos */
+    backdrop-filter: saturate(160%); /* efecto de desenfoque */
     background: color-mix(in oklab, var(--bg) 70%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
 }
+
 .nav-inner{
     display: flex;
     align-items: center;
@@ -77,8 +81,8 @@ img {
 .brand {
     font-weight: 800;
     letter-spacing: 1px;
-
 }
+
 .nav-links {
     display: flex;
     gap: 20px;
@@ -87,6 +91,7 @@ img {
   position: relative;
   padding: 4px 0;
 }
+/* Línea animada debajo de los enlaces */
 .nav-links a::after{
   content: "";
   position: absolute;
@@ -101,9 +106,11 @@ img {
 .nav-links a:hover::after {
   width: 100%; /* la línea se expande en hover */
 }
-
-
-
+.nav-btns {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
 
 /* ====== Botones ====== */
 .btn {
@@ -116,11 +123,11 @@ img {
     background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
     color: var(--text);
     box-shadow: var(--shadow);
-    transition: 0.2s transform, 0.2s box-shadow, 0.2s background;
+    transition: 0.4s transform, 0.2s box-shadow, 0.2s background;
 }
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
 }
 .btn .ghost {
     background: transparent;
@@ -128,14 +135,14 @@ img {
     box-shadow: none;
 }
 
+/* ====== MENÚ MÓVIL ====== */
 .mobile-menu {
   position: absolute;
-  top: 64px;          /* debajo de la navbar */
+  top: 64px;
   left: 0;
   right: 0;
   background: var(--surface);
   border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-
   transform: translateY(-20px);  /* arranca desplazado hacia arriba */
   opacity: 0;                   /* invisible */
   pointer-events: none;          /* no interactúa cuando está oculto */
@@ -145,7 +152,7 @@ img {
 .mobile-menu a {
   display: block;
   padding: 14px 24px;
-  border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);
+  border-top: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
 }
 
 /* Estado visible */
@@ -156,26 +163,30 @@ img {
   pointer-events: auto;       /* ahora sí se puede hacer clic */
 }
 
-/* Estilos para home */
+/* ====== HERO / HOME ====== */
 .hero {
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .hero::before {
   content: "";
   position: absolute;
-  inset: -20% -10% auto -10%;
-  height: 80%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(45deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 55%, #3aa45b) 60%);
   clip-path: polygon(100% 0, 100% 100%, 30% 100%, 0 25%, 0 0);
   opacity: .15;
+  pointer-events: none;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 0.85fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   align-items: center;
   gap: 32px;
   padding: 80px 0;
+  overflow: hidden;
 }
 .kicker {
   color: var(--accent);
@@ -201,6 +212,7 @@ img {
   color: color-mix(in oklab, var(--accent) 40%, var(--text) 60%);
 }
 
+/* ====== botones hero ====== */
 .hero-cta{
   margin-top: 22px;
   display: flex;
@@ -208,13 +220,15 @@ img {
   flex-wrap: wrap;
   justify-content: center; /* centra horizontalmente */
 }
+/* ====== Avatar ====== */
 .avatar-wrap {
   display: flex;
   justify-content: center; /* centra horizontalmente */
   align-items: center;     /* centra verticalmente */
 }
+
 .avatar {
-  width: clamp(300px, 50vw, 400px);
+  width: clamp(250px, 40vw, 400px);
   aspect-ratio: 1 / 1;       /* mantiene proporción cuadrada */
   background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
   display: grid;
@@ -222,6 +236,7 @@ img {
   position: relative;
   overflow: hidden;
   border-radius: 55% 45% 48% 52% / 77% 25% 75% 23%;
+  margin: 0 auto;
 }
 .avatar img {
   width: 100%;
@@ -336,6 +351,13 @@ textarea {
   min-height: 130px;
   resize: vertical;
 }
+.card-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .card-body{
   padding: 18px;
 }
@@ -376,6 +398,7 @@ textarea {
 }
 .tags {
   display: flex;
+  justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
   margin: 10px 0 14px;
@@ -646,6 +669,11 @@ textarea {
   color: var(--accent);
   transform: translateY(-2px); /* Efecto sutil al pasar el ratón */
 }
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre los iconos */
+}
 
 /* Responsividad para el footer mejorado */
 @media (max-width: 600px) {
@@ -659,5 +687,12 @@ textarea {
   }
   .footer-links {
     order: 1; /* Mueve los enlaces arriba */
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .contact {
+    grid-template-columns: 1fr; /* columna única */
+    justify-items: center; /* centra los elementos */
   }
 }

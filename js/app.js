@@ -218,3 +218,11 @@ function sendMessage(e) {
       alert("Error al enviar: " + error.text);
     });
 }
+
+// const allElements = document.querySelectorAll('*');
+// allElements.forEach(el => {
+//   if (el.scrollWidth > el.clientWidth) {
+//     console.log(el); // imprime el elemento problemático
+//   }
+// });
+// console.log(document.querySelector('.avatar').getBoundingClientRect());
