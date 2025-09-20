@@ -29,6 +29,7 @@
 }
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -36,6 +37,7 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: var(--bg);
     color: var(--text);
+    overflow-x: hidden;
 }
 
 a {
@@ -170,7 +172,7 @@ img {
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 0.85fr);
   align-items: center;
   gap: 32px;
   padding: 80px 0;
@@ -620,7 +622,7 @@ textarea {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .footer-copyright {
