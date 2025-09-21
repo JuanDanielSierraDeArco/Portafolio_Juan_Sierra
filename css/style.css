@@ -62,7 +62,6 @@ img {
 .container {
     max-width: 1100px; /* Limitar ancho del contenedor */
     margin: 0 auto;
-    margin-bottom: 50px;
     padding: 0 24px;
 }
 .hero-grid {
@@ -76,9 +75,12 @@ img {
 
 /* ====== NAVBAR ====== */
 .navbar {
-    position: sticky; /* fija la navbar al hacer scroll */
+    position: fixed; /* fija la navbar al hacer scroll */
     top: 0;
-    z-index: 50;      /* encima de otros elementos */
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 999;      /* encima de otros elementos */
     backdrop-filter: saturate(160%); /* efecto de desenfoque */
     background: color-mix(in oklab, var(--bg) 70%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
@@ -266,6 +268,7 @@ img {
   z-index: 1;  /*Asegura que el contenido esté por encima del fondo decorativo */
 }
 .section-title {
+  margin-top: 50px;
   font-size: clamp(28px, 6vw, 40px);
   margin-bottom: 16px;
   text-align: left;
