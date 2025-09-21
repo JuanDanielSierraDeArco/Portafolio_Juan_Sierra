@@ -1,17 +1,8 @@
 // app.js
-// Versión robusta y comentada para manejar:
-// - Tema claro/oscuro (guardado en localStorage)
-// - Inicialización y recarga de tsParticles según el tema
-// - Menú móvil
-// - Protección contra errores (elementos que no existen, librería no cargada, etc.)
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Referencias al DOM --------------------------------------------------
-  // "root" apunta a <html> para cambiar variables CSS (clase .light)
   const root = document.documentElement;
-
-  // Botón que alterna tema (asegúrate que exista en el HTML: id="modeBtn")
-  const modeBtn = document.getElementById("modeBtn");
+  const modeBtn = document.getElementById("modeBtn"); // Botón que alterna tema (asegúrate que exista en el HTML: id="modeBtn")
 
   // Botones/menu móvil (ids deben existir en HTML)
   const menuBtn = document.getElementById("menuBtn");
