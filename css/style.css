@@ -62,6 +62,7 @@ img {
 .container {
     max-width: 1100px; /* Limitar ancho del contenedor */
     margin: 0 auto;
+    margin-bottom: 50px;
     padding: 0 24px;
 }
 .hero-grid {
