@@ -196,21 +196,45 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------
     // 7. Envío de formulario con EmailJS
     // ----------------------------
-    function sendMessage(e) {
-        e.preventDefault();
-        const form = e.target;
+function sendMessage(e) {
+    e.preventDefault();
+    const form = e.target;
 
-        emailjs.sendForm("service_t9v8fkj", "template_1gcc2w9", form, "9QUrkBRou0gg-STAW")
-            .then(response => {
-                console.log("✅ Mensaje enviado:", response);
-                alert("¡Mensaje enviado con éxito! 🎉");
-                form.reset();
-            })
-            .catch(error => {
-                console.error("❌ Error al enviar:", error);
-                alert("Error al enviar: " + error.text);
-            });
+    // Validación básica antes de enviar
+    if (!form.checkValidity()) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
     }
+
+    // Mostrar mensaje de “enviando…”
+    console.log("Enviando formulario...");
+    if (!form.querySelector(".sending-msg")) {
+        const msg = document.createElement("span");
+        msg.className = "sending-msg";
+        msg.textContent = "Enviando...";
+        form.appendChild(msg);
+    }
+
+    emailjs.sendForm("service_t9v8fkj", "template_1gcc2w9", form, "9QUrkBRou0gg-STAW")
+        .then(response => {
+            console.log("✅ Mensaje enviado:", response);
+            alert("¡Mensaje enviado con éxito! 🎉");
+
+            // Quitar mensaje de “enviando…”
+            const msg = form.querySelector(".sending-msg");
+            if (msg) msg.remove();
+
+            form.reset();
+        })
+        .catch(error => {
+            console.error("❌ Error al enviar:", error);
+            alert("Error al enviar: " + error.text);
+
+            // Quitar mensaje de “enviando…”
+            const msg = form.querySelector(".sending-msg");
+            if (msg) msg.remove();
+        });
+}
 
 
 
