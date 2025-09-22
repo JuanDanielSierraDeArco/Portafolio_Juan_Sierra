@@ -205,7 +205,7 @@ img {
   max-width: 1200px;
   margin: 0 auto;
   opacity: 0; /* fade-in con GSAP */
-
+}
 .title {
   font-size: clamp(28px, 6vw, 40px);
   line-height: 1.1;
