@@ -156,27 +156,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----------------------------
-  // 7. Animación del título con GSAP (una sola vez)
+  // 7. Animación del título con GSAP (corregida)
   // ----------------------------
   function animateTitle() {
     const title = document.getElementById("elegant-title");
     if (!title) return;
 
-    title.style.visibility = "hidden";
     const letters = title.textContent.trim().split("");
     title.innerHTML = "";
+
     letters.forEach(letter => {
       const span = document.createElement("span");
       span.textContent = letter === " " ? "\u00A0" : letter;
+      span.style.display = "inline-block"; // clave para que no mueva layout
       title.appendChild(span);
     });
-    title.style.visibility = "visible";
 
     gsap.from(title.querySelectorAll("span"), {
-      duration: 1.5,
-      y: 50,
+      duration: 0.8,
       opacity: 0,
-      ease: "power2.out",
+      scale: 0.8,
+      ease: "back.out(1.7)",
       stagger: 0.05
     });
   }
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('load', () => {
     const kicker = document.querySelector(".kicker");
     if (kicker) {
-      gsap.to(kicker, { opacity: 1, duration: 0.5, ease: "power1.out" });
+      gsap.to(kicker, { opacity: 1, duration: 0.5 });
     }
     animateTitle();
     loadParticles();
