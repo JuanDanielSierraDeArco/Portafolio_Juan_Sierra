@@ -203,41 +203,33 @@ img {
   opacity: .15;
   pointer-events: none;
 }
-
-/*animacion del titulo*/
-.kicker {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;             /* evita desbordes */
-  text-align: center;
-}
-
-/* Estilo del título */
-/* Contenedor del título */
+/* ====== ANIMACIÓN Y ESTILO DEL TÍTULO ====== */
 .kicker {
   text-align: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  opacity: 0; /* fade-in con GSAP */
+  margin: 50px 0;
+  overflow: hidden;
 }
-.title {
-  font-size: clamp(28px, 6vw, 40px);
-  line-height: 1.1;
-  margin: 8px 0 12px;
-}
+
 #elegant-title {
-    text-align: center; /* centra el texto dentro del contenedor */
-    transform: translateY(20px); /* posición inicial para animación */
-    color: var(--accent);
+  font-size: 3rem;
+  font-weight: bold;
 }
+
 #elegant-title span {
-  display: inline-block; /* clave para animación sin mover layout */
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  color: var(--accent);
 }
-.greeting {
-  white-space: nowrap;
+
+.title {
+  font-size: 2rem;
+  color: #888;
+  opacity: 0;           /* empieza invisible */
+  transform: translateY(20px);
+  margin-top: 10px;
+  display: inline-block;
+  color: var(--text);
 }
 
 .lead {
@@ -735,7 +727,4 @@ textarea {
     grid-template-columns: 1fr; /* columna única */
     justify-items: center; /* centra los elementos */
   }
-}
-#elegant-title {
-  visibility: hidden; /* Oculta el título hasta que el script de GSAP lo anime */
 }
