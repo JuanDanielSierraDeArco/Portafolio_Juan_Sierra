@@ -1,0 +1,56 @@
+[DOM cargado] (DOMContentLoaded)
+        |
+        v
+[Inicializar Tema]
+  ├─> Revisar localStorage (THEME_KEY)
+  └─> Aplicar clase .light si corresponde
+        |
+        v
+[Configurar botón de tema]
+  ├─> click en modeBtn
+  └─> Alternar clase .light y actualizar icono y localStorage
+        |
+        v
+[Configurar menú móvil]
+  ├─> click en menuBtn → alterna clase .active en mobileMenu
+  └─> click en cualquier enlace del menú → cierra menú
+        |
+        v
+[Reveal on Scroll (IntersectionObserver)]
+  ├─> Detecta elementos .reveal
+  ├─> Si IntersectionObserver disponible:
+  │       └─> Añadir/retirar clase .visible según visibilidad en viewport
+  └─> Fallback (scroll event)
+        |
+        v
+[Navbar auto-hide]
+  ├─> Detecta scroll
+  ├─> Scroll hacia abajo → oculta navbar (.hidden)
+  ├─> Scroll hacia arriba o pausa → muestra navbar
+        |
+        v
+[Animación del título (#elegant-title)]
+  ├─> Separar texto en spans (una letra por span)
+  ├─> Si GSAP disponible → animación continua (yoyo)
+  └─> Fallback → animación simple con CSS/JS
+        |
+        v
+[tsParticles]
+  ├─> Configura partículas (texto de tecnologías)
+  ├─> Colores y comportamiento según tema
+  └─> Hover → repulsión, Click → nuevas partículas
+        |
+        v
+[Opcional] Formulario contacto
+  ├─> Envía datos con EmailJS
+  ├─> Success → alert mensaje enviado
+  └─> Error → alert error
+
+
+Si quieres, puedo hacer tres cosas:
+
+Optimizar tu CSS: Reducir repeticiones y limpiar propiedades redundantes.
+
+Mejorar la responsividad: Ajustar breakpoints, grids y hero para móviles muy pequeños.
+
+Agregar pequeños detalles de animación o hover: Para botones, skills, proyectos y timeline.

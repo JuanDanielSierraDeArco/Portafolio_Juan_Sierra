@@ -84,6 +84,12 @@ img {
     backdrop-filter: saturate(160%); /* efecto de desenfoque */
     background: color-mix(in oklab, var(--bg) 70%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Ocultar navbar moviéndolo hacia arriba */
+.navbar.hidden {
+  transform: translateY(-100%);
 }
 
 .nav-inner{
@@ -206,13 +212,13 @@ img {
 }
 #elegant-title {
   display: block;
-  max-width: 100%;          /* que nunca exceda el ancho del viewport */
-  text-align: center;       /* centrado */
-  word-break: break-word;   /* por compatibilidad */
-  white-space: normal;      /* permite saltos de línea */
+  max-width: 100%;
+  text-align: center;    
+  word-break: break-word;  
+  white-space: normal;
 }
 .greeting {
-  white-space: nowrap; /* nunca se separa */
+  white-space: nowrap;
 }
 .lead {
   color: var(--muted);
@@ -625,7 +631,6 @@ textarea {
 /* 1. ESTADO INICIAL (OCULTO) */
 .reveal {
   opacity: 0;
-  /* Efecto por defecto: aparecer desde abajo */
   transform: translateY(30px); 
   transition: opacity 1s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -639,7 +644,14 @@ textarea {
 .reveal.fade-right {
   transform: translateX(40px);
 }
+/* Modificador para aparecer desde arriba */
+.reveal.fade-up {
+  transform: translateY(-40px);
+}
 
+.reveal.fade-down {
+  transform: translateY(40px);
+}
 
 /* 2. ESTADO FINAL (VISIBLE) */
 /* Se activa con JavaScript cuando el elemento entra en la pantalla */

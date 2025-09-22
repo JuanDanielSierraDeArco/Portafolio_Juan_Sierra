@@ -15,9 +15,11 @@
     <!-- ====== SCRIPTS EXTERNOS ====== -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 
 <body>
+    <div id="tsparticles"></div>
     <!--========NAVBAR====-->
     <nav class="navbar">
         <div class="container nav-inner">
@@ -47,11 +49,11 @@
 
     <main class="main">
         <!-- ====== SECCIÓN INICIO ====== -->
-        <section id="home" class="hero reveal">
+        <section id="home" class="hero reveal fade-right">
             <div class="hero-grid container">
                 <aside class="hero-content">
                     <div class="kicker">
-                        <h1 class="elegant-title">
+                        <h1 id="elegant-title">
                             <span class="greeting">Hola👋</span>. <br>Bienvenido a mi portafolio
                         </h1>
                     </div>
@@ -281,7 +283,7 @@
         </section>
 
         <!-- ====== FOOTER ====== -->
-        <footer class="site-footer ">
+        <footer class="site-footer reveal fade-up">
             <div class=" container footer-container">
 
                 <div class="footer-copyright">
