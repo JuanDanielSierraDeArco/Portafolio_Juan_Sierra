@@ -1,6 +1,7 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------
-  // 1. Variables globales
+  // 1. Variables globales y helpers
   // ----------------------------
   const root = document.documentElement;
   const modeBtn = document.getElementById("modeBtn");
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. tsParticles
   // ----------------------------
   function getParticlesConfig() {
+    const isLight = root.classList.contains("light");
     return {
       fullScreen: { enable: true, zIndex: -1 },
       background: { color: getCssVar("--bg") },
@@ -109,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----------------------------
-  // 5. Navbar auto-hide
+  // 4b. Navbar: ocultar al bajar y mostrar al subir
   // ----------------------------
   function setupNavbarAutoHide() {
     const navbar = document.querySelector(".navbar");
@@ -123,8 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const current = window.pageYOffset || 0;
 
       if (current > lastScroll && current > 80) {
+        // scrolleando hacia abajo y pasado umbral -> ocultar
         navbar.classList.add("hidden");
       } else {
+        // scrolleando hacia arriba -> mostrar
         navbar.classList.remove("hidden");
       }
 
@@ -137,13 +141,18 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(update);
         ticking = true;
       }
+
+      // Si el usuario se detiene (pausa) mostramos la navbar
       clearTimeout(stopTimer);
       stopTimer = setTimeout(() => navbar.classList.remove("hidden"), 220);
     }, { passive: true });
   }
 
+
+
+
   // ----------------------------
-  // 6. Reveal on scroll
+  // 5. Animación de revelado al hacer scroll
   // ----------------------------
   function setupRevealOnScroll() {
     const observer = new IntersectionObserver(entries => {
@@ -156,34 +165,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----------------------------
-  // 7. Animación del título con GSAP (corregida)
+  // 6. Animación del título con GSAP
   // ----------------------------
   function animateTitle() {
     const title = document.getElementById("elegant-title");
     if (!title) return;
 
+    title.style.visibility = "hidden";
     const letters = title.textContent.trim().split("");
     title.innerHTML = "";
-
     letters.forEach(letter => {
       const span = document.createElement("span");
       span.textContent = letter === " " ? "\u00A0" : letter;
-      span.style.display = "inline-block"; // clave para que no mueva layout
       title.appendChild(span);
     });
+    title.style.visibility = "visible";
 
     gsap.from(title.querySelectorAll("span"), {
-      duration: 0.8,
+      duration: 1.5,
+      y: 50,
       opacity: 0,
-      scale: 0.8,
-      ease: "back.out(1.7)",
-      stagger: 0.05
+      ease: "power2.out",
+      stagger: 0.05,
+      repeat: -1,
+      yoyo: true,
+      repeatDelay: 2,
     });
   }
 
   // ----------------------------
-  // 8. Envío de formulario con EmailJS
-  // ----------------------------
+  // 7. Envío de formulario con EmailJS
   emailjs.init("9QUrkBRou0gg-STAW");
   const contactForm = document.getElementById("contactForm");
   if(contactForm){
@@ -201,24 +212,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----------------------------
-  // 9. Animaciones hero al cargar todo
-  // ----------------------------
   window.addEventListener('load', () => {
-    const kicker = document.querySelector(".kicker");
-    if (kicker) {
-      gsap.to(kicker, { opacity: 1, duration: 0.5 });
-    }
-    animateTitle();
-    loadParticles();
-  });
+    gsap.to(".kicker", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out"
+    });
+
+    gsap.to("#elegant-title", {
+        y: 0,        // sube desde 20px
+        duration: 1,
+        delay: 0.3,
+        ease: "power2.out"
+    });
+});
 
   // ----------------------------
   // Inicialización
   // ----------------------------
+
   initTheme();
   setupThemeToggle();
+  loadParticles();
   setupMobileMenu();
   setupRevealOnScroll();
+  animateTitle();
   setupNavbarAutoHide();
+
 });

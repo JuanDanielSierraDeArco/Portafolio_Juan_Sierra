@@ -200,11 +200,11 @@ img {
   pointer-events: none;
 }
 .kicker {
-  text-align: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  opacity: 0; /* fade-in con GSAP */
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* centra horizontalmente */
+    opacity: 0; /* oculto al inicio */
 }
 .title {
   font-size: clamp(28px, 6vw, 40px);
@@ -215,9 +215,6 @@ img {
     text-align: center; /* centra el texto dentro del contenedor */
     transform: translateY(20px); /* posición inicial para animación */
     color: var(--accent);
-}
-#elegant-title span {
-  display: inline-block; /* clave para animación sin mover layout */
 }
 .greeting {
   white-space: nowrap;
@@ -728,4 +725,7 @@ textarea {
     grid-template-columns: 1fr; /* columna única */
     justify-items: center; /* centra los elementos */
   }
+}
+#elegant-title {
+  visibility: hidden; /* Oculta el título hasta que el script de GSAP lo anime */
 }
