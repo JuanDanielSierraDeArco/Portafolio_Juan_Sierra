@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----------------------------
-  // 7. Animación del título con GSAP (corregida)
+  // 7. Animación del título con GSAP (sin afectar layout)
   // ----------------------------
   function animateTitle() {
     const title = document.getElementById("elegant-title");
@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const letters = title.textContent.trim().split("");
     title.innerHTML = "";
-
     letters.forEach(letter => {
       const span = document.createElement("span");
       span.textContent = letter === " " ? "\u00A0" : letter;
