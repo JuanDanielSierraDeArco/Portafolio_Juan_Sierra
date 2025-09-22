@@ -212,6 +212,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  window.addEventListener('load', () => {
+    gsap.to(".kicker", {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power1.out"
+    });
+
+    gsap.to("#elegant-title", {
+        y: 0,        // sube desde 20px
+        duration: 1,
+        delay: 0.3,
+        ease: "power2.out"
+    });
+});
+
   // ----------------------------
   // Inicialización
   // ----------------------------

@@ -200,10 +200,11 @@ img {
   pointer-events: none;
 }
 .kicker {
-  color: var(--accent);
-  font-weight: 800;
-  letter-spacing: .04em;
-  margin-bottom: 16px;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* centra horizontalmente */
+    opacity: 0; /* oculto al inicio */
 }
 .title {
   font-size: clamp(28px, 6vw, 40px);
@@ -211,11 +212,9 @@ img {
   margin: 8px 0 12px;
 }
 #elegant-title {
-  display: block;
-  max-width: 100%;
-  text-align: center;    
-  word-break: break-word;  
-  white-space: normal;
+    text-align: center; /* centra el texto dentro del contenedor */
+    transform: translateY(20px); /* posición inicial para animación */
+    color: var(--accent);
 }
 .greeting {
   white-space: nowrap;
