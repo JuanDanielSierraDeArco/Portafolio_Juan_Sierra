@@ -729,6 +729,3 @@ textarea {
     justify-items: center; /* centra los elementos */
   }
 }
-#elegant-title {
-  visibility: hidden; /* Oculta el título hasta que el script de GSAP lo anime */
-}
