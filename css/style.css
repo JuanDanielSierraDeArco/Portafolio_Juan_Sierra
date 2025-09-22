@@ -12,6 +12,9 @@
   --accent-3: #a1a1a1;  /* Otro color de acento (gris) */
   --shadow: 0 10px 30px rgba(0,0,0,.4); /* Sombra predeterminada */
   --radius: 18px;       /* Radio de borde general */
+  --reveal-distance: 40px;      /* Distancia de desplazamiento */
+  --reveal-duration: 1s;        /* Duración de la animación */
+  --reveal-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva */
 }
 
 /* ====== MODO CLARO ====== */
@@ -186,6 +189,7 @@ img {
 /* ====== HERO / HOME ====== */
 .hero {
     position: relative;
+    overflow: hidden; /* asegura que los elementos decorativos no desborden */
 }
 .hero::before {
   content: "";
@@ -199,12 +203,25 @@ img {
   opacity: .15;
   pointer-events: none;
 }
+
+/*animacion del titulo*/
 .kicker {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; /* centra horizontalmente */
-    opacity: 0; /* oculto al inicio */
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;             /* evita desbordes */
+  text-align: center;
+}
+
+/* Estilo del título */
+/* Contenedor del título */
+.kicker {
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0; /* fade-in con GSAP */
 }
 .title {
   font-size: clamp(28px, 6vw, 40px);
@@ -216,9 +233,13 @@ img {
     transform: translateY(20px); /* posición inicial para animación */
     color: var(--accent);
 }
+#elegant-title span {
+  display: inline-block; /* clave para animación sin mover layout */
+}
 .greeting {
   white-space: nowrap;
 }
+
 .lead {
   color: var(--muted);
   font-size: 18px;
@@ -533,7 +554,7 @@ textarea {
   .mobile-menu a {
     display: block;
     padding: 14px 24px;
-    border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);
+    border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);h
   }
 }
 #tsparticles {
@@ -627,36 +648,25 @@ textarea {
 /* ====== EFECTO SCROLL REVEAL ====== */
 /* ================================== */
 
-/* 1. ESTADO INICIAL (OCULTO) */
+/* Estado inicial: oculto y desplazado */
 .reveal {
   opacity: 0;
-  transform: translateY(30px); 
-  transition: opacity 1s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    opacity var(--reveal-duration) ease-out,
+    transform var(--reveal-duration) var(--reveal-ease);
+  will-change: opacity, transform;
 }
 
-/* Modificador para aparecer desde la izquierda */
-.reveal.fade-left {
-  transform: translateX(-40px);
-}
+/* Direcciones: solo cambian la transformación inicial */
+.reveal.fade-left   { transform: translateX(calc(-1 * var(--reveal-distance))); }
+.reveal.fade-right  { transform: translateX(var(--reveal-distance)); }
+.reveal.fade-up     { transform: translateY(calc(-1 * var(--reveal-distance))); }
+.reveal.fade-down   { transform: translateY(var(--reveal-distance)); }
 
-/* Modificador para aparecer desde la derecha */
-.reveal.fade-right {
-  transform: translateX(40px);
-}
-/* Modificador para aparecer desde arriba */
-.reveal.fade-up {
-  transform: translateY(-40px);
-}
-
-.reveal.fade-down {
-  transform: translateY(40px);
-}
-
-/* 2. ESTADO FINAL (VISIBLE) */
-/* Se activa con JavaScript cuando el elemento entra en la pantalla */
+/* Estado final: visible */
 .reveal.visible {
   opacity: 1;
-  transform: none; /* Resetea cualquier transform (translateX o translateY) a su posición original */
+  transform: translate(0, 0);
 }
 
 
