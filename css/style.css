@@ -1,5 +1,6 @@
 /* ================================== */
-/* ====== VARIABLES GLOBALES ====== */
+/* ====== VARIABLES & THEMES ====== */
+/* ================================== */
 /* Colores, sombras y radios usados en todo el sitio */
 :root {
   --bg: #0e0e0e;        /* Fondo principal oscuro */
@@ -16,7 +17,6 @@
   --reveal-duration: 1s;        /* Duración de la animación */
   --reveal-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva */
 }
-
 /* ====== MODO CLARO ====== */
 .light {
   --bg: #f5f9ff;        /* Fondo claro */
@@ -29,54 +29,50 @@
   --card: #ffffff;      
   --shadow: 0 10px 25px rgba(0, 0, 0, .1); /* Sombra más ligera */
 }
-
-/* ====== RESETEOS GENERALES ====== */
+/* ================================== */
+/* ====== RESET & BASE STYLES ====== */
+/* ================================== */
 *{
     box-sizing: border-box; /* incluye padding y border en el width/height */
     margin: 0;
     padding: 0;
     /*outline: 1px solid red;  marca todos los elementos */
 }
+/* Estilos base para html y body */
 html {
     scroll-behavior: smooth;
     width: 100%;
     overflow-x: hidden;
 }
-
+/* Fuente y color base para todo el sitio */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    width: 100%;
-    overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text);
+  width: 100%;
+  overflow-x: hidden;
 }
-
+/* Enlaces e imágenes base */
 a {
     color: inherit; /* Hereda color de texto */
     text-decoration: none; /* Sin subrayado */
     transition: color 0.3s ease;
 }
-
+/* Efecto hover en enlaces */
 img {
     max-width: 100%; /* limitar ancho maximo de imagenes */
     margin: 0 auto; /* centrar horizontalmente */
     display: block; /* evita espacio debajo de la imagen */
 }
+/* Contenedor principal */
 .container {
-    max-width: 1100px; /* Limitar ancho del contenedor */
-    margin: 0 auto;
-    padding: 0 24px;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px 24px;
+    width: 100%;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  min-width: 0;
-  align-items: center;
-  gap: 32px;
-  padding: 80px 0;
-}
-
-/* ====== NAVBAR ====== */
+/* ================================== */
+/* ====== NAVIGATION (Navbar + Mobile) ====== */
+/* ================================== */
 .navbar {
     position: fixed; /* fija la navbar al hacer scroll */
     top: 0;
@@ -89,53 +85,117 @@ img {
     border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
     transition: transform 0.5s ease-in-out;
 }
-
 /* Ocultar navbar moviéndolo hacia arriba */
 .navbar.hidden {
   transform: translateY(-100%);
 }
-
-.nav-inner{
+/* Contenedor interno para alinear elementos */
+.nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 63px;         /* o quita esta línea para que se ajuste al contenido */
+    margin: 0 auto;       /* sin margen vertical extra */
+    padding: 0 16px;      /* solo padding lateral */
+    max-width: 1100px;
+    width: 100%;
 }
+/* Logo */
 .brand {
     font-weight: 800;
     letter-spacing: 1px;
 }
 
+/* Enlaces de navegación */
 .nav-links {
     display: flex;
     gap: 20px;
 }
+/* Enlaces individuales */
 .nav-links a {
   position: relative;
   padding: 4px 0;
 }
-/* Línea animada debajo de los enlaces */
-.nav-links a::after{
-  content: "";
+/* Línea animada debajo del enlace activo o al pasar el mouse */
+.nav-links a {
+  position: relative;
+  display: inline-block; /* asegura que el pseudo-elemento se ajuste al texto */
+}
+/* Línea animada */
+.nav-links a::after {
+  content: '';
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0%;
+  left: 0;
+  bottom: -4px;
+  width: 100%;            
   height: 2px;
   background: var(--accent);
-  transition: width 0.6s ease-in-out;
-  transform: translateX(-50%);
+  transform: scaleX(0);     
+  transform-origin: right;  
+  transition: transform 0.6s ease;
 }
-.nav-links a:hover::after {
-  width: 100%; /* la línea se expande en hover */
+/* Efecto hover */
+.nav-links a:hover::after,
+.nav-links a.active::after { /* también para el enlace activo */
+  transform: scaleX(1);     /* se expande de derecha a izquierda */
+  transform-origin: left;
 }
+
+/* ====== MENÚ MÓVIL ====== */
+.mobile-menu {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  transform: translateY(-20px);
+  opacity: 0;                  
+  pointer-events: none;      
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Enlaces dentro del menú móvil */
+.mobile-menu a {
+  display: block;
+  padding: 14px 24px;
+  border-top: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+}
+/* Hover en enlaces del menú móvil */
+.mobile-menu a:hover {
+  background: color-mix(in oklab, var(--accent) 15%, var(--surface));
+  color: var(--accent);
+}
+/* Estado visible */
+.mobile-menu.active {
+  display: block;
+  transform: translateY(0);   /* se desliza hacia abajo */
+  opacity: 1;                 /* aparece con fade */
+  pointer-events: auto;       /* ahora sí se puede hacer clic */
+}
+/* Botón de menú (hamburguesa) */
+.menu-btn {
+  display: inline-flex; 
+  align-items: center;
+  gap: 8px;
+  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.menu-btn:hover {
+  background: color-mix(in oklab, var(--accent) 15%, var(--surface));
+  border-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ====== Botones ====== */
+
 .nav-btns {
     display: flex;
     gap: 15px;
     align-items: center;
 }
-
-/* ====== Botones ====== */
+/* botones genéricos */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -148,90 +208,111 @@ img {
     box-shadow: var(--shadow);
     transition: 0.4s transform, 0.2s box-shadow, 0.2s background;
 }
-.btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
-}
+/* Botón estilo "ghost" (transparente) */
 .btn .ghost {
     background: transparent;
     border: 1px solid color-mix(in oklab, var(--text) 15%, transparent);
     box-shadow: none;
 }
-
-/* ====== MENÚ MÓVIL ====== */
-.mobile-menu {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-  transform: translateY(-20px);  /* arranca desplazado hacia arriba */
-  opacity: 0;                   /* invisible */
-  pointer-events: none;          /* no interactúa cuando está oculto */
-  transition: transform 0.3s ease, opacity 0.3s ease;
+/* Efecto hover */
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
 }
-
-.mobile-menu a {
-  display: block;
-  padding: 14px 24px;
-  border-top: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-}
-
-/* Estado visible */
-.mobile-menu.active {
-  display: block;
-  transform: translateY(0);   /* se desliza hacia abajo */
-  opacity: 1;                 /* aparece con fade */
-  pointer-events: auto;       /* ahora sí se puede hacer clic */
-}
-
-/* ====== HERO / HOME ====== */
+/* ================================== */
+/* ====== HERO (Home Section) ====== */
+/* ================================== */
+/* Hero principal */
 .hero {
     position: relative;
-    overflow: hidden; /* asegura que los elementos decorativos no desborden */
+    overflow: hidden;
 }
+/* Capa decorativa con degradado y forma */
 .hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 55%, #3aa45b) 60%);
-  clip-path: polygon(100% 100%, 0 0, 100% 0);
-  opacity: .15;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--accent) 0%, color-mix(in oklab, var(--accent) 55%, #3aa45b) 60%);
+    clip-path: polygon(100% 100%, 0 0, 100% 0);
+    opacity: .15;
+    pointer-events: none;
 }
-/* ====== ANIMACIÓN Y ESTILO DEL TÍTULO ====== */
-.kicker {
-  text-align: center;
-  margin: 50px 0;
+/* Grid para contenido del hero */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  min-width: 0;
+  align-items: center;
+  gap: 32px;
+  padding: 80px 0;
+}
+/* Contenido textual del hero */
+.hero-content {
+  padding: 0 15px;
+  align-items: center;
+  z-index: 1;
+}
+/* Botones de llamada a la acción */
+.hero-cta {
+  margin-top: 22px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/* Avatar decorativo */
+.avatar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Avatar con forma orgánica */
+.avatar {
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 1 / 1; /* mantiene cuadrado */
+  border-radius: 55% 45% 48% 52% / 77% 25% 75% 23%;
   overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 6px solid var(--surface);
 }
-
+/* Estilos para la imagen del avatar */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(15deg);
+}
+/* Textos del hero */
+.kicker {
+  padding: 20px;
+}
+/* Título elegante */
 #elegant-title {
   font-size: 3rem;
   font-weight: bold;
 }
-
+/* Título con animación */
 #elegant-title span {
   display: inline-block;
   opacity: 0;
   transform: translateY(100%);
   color: var(--accent);
 }
-
+/* Título principal */
 .title {
   font-size: 2rem;
   color: #888;
-  opacity: 0;           /* empieza invisible */
+  opacity: 0; 
   transform: translateY(20px);
   margin-top: 10px;
   display: inline-block;
   color: var(--text);
 }
-
+/* Párrafo descriptivo */
 .lead {
   color: var(--muted);
   font-size: 18px;
@@ -239,214 +320,251 @@ img {
   margin-bottom: 24px;
   text-align: justify;
 }
-
+/* Resaltar palabras en el párrafo */
 .lead span {
   font-weight: bold;
   color: color-mix(in oklab, var(--accent) 40%, var(--text) 60%);
+  transition: color 0.3s ease;
 }
-
-/* ====== botones hero ====== */
-.hero-cta{
-  margin-top: 22px;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center; /* centra horizontalmente */
+/* Efecto hover */
+.lead span:hover {
+  color: var(--accent); /* resalta aún más al pasar el mouse */
 }
-/* ====== Avatar ====== */
-.avatar-wrap {
-  display: flex;
-  justify-content: center; /* centra horizontalmente */
-  align-items: center;     /* centra verticalmente */
-}
-
-.avatar {
-  width: clamp(250px, 40vw, 400px);
-  aspect-ratio: 1 / 1;       /* mantiene proporción cuadrada */
-  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 25%, var(--surface) 75%));
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 55% 45% 48% 52% / 77% 25% 75% 23%;
-  margin: 0 auto;
-}
-.avatar img {
-  width: 100%;
-  height: 100%;
-  bottom: 20px;
-  position: relative;
-  object-fit: cover;
-  display: block;
-  transform: rotate(15deg);
-}
-.hero-content {
-  padding: 0 15px;
-  align-items: center;
-  z-index: 1;  /*Asegura que el contenido esté por encima del fondo decorativo */
-}
+/* ================================== */
+/* ====== SECTIONS (Generic Titles) ====== */
+/* ================================== */
+/* Títulos genéricos para secciones */
 .section-title {
-  margin-top: 50px;
+  text-align: left;
+  margin-top: 25px;
   font-size: clamp(28px, 6vw, 40px);
   margin-bottom: 16px;
-  text-align: left;
-  position: relative;  /* necesario para el pseudo-elemento */
+  color: var(--text);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  position: relative;
 }
+/* Línea decorativa debajo del título */
 .section-title::after {
   content: "";
   background: var(--accent);
   border-radius: 2px;
   position: absolute;
-  width: 60px;
+  width: 0;
   height: 4px;
   bottom: -8px;
   left: 0;
+  transition: width 0.5s ease;
 }
+/* Efecto hover */
+.section-title:hover::after {
+  width: 60px; /* se expande al pasar el mouse */
+}
+/* Texto secundario / muted */
 .muted {
   color: var(--muted);
   font-size: 18px;
-  line-height: 1.2;
+  line-height: 1.5;
   text-align: justify;
+  letter-spacing: 0.5px;
 }
-.muted span {
+/* Resaltar palabras en el texto secundario */
+.muted strong {
   font-weight: bold;
   color: color-mix(in oklab, var(--accent) 40%, var(--text) 60%);
+  transition: color 0.3s ease;
 }
-/* ====== HABILIDADES ======*/
+/* Efecto hover */
+.muted strong:hover {
+  color: var(--accent);
+}
+/* ================================== */
+/* ====== SKILLS ====== */
+/* ================================== */
+/* Sección de habilidades */
 .skills-section {
-  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--accent) 6%, transparent) 60%, transparent);
+  margin-top: 40px;
+  padding: 20px 30px 20px 20px;
+
 }
+
+/* Grid de skills */
 .skills {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 20px;
-  padding: 40px 0;
+  padding: 0;
 }
+
+/* Cards de skill */
 .skill {
-  display: flex;              /* usamos flexbox */
-  flex-direction: column;     /* apila imagen y texto en columna */
-  align-items: center;        /* centra en horizontal */
-  justify-content: center;    /* centra en vertical */
-  text-align: center;         /* asegura que el texto esté centrado */
-  padding: 12px;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+
+  /* Animación de entrada */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.skill.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Borde animado */
+.skill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover del card */
+.skill:hover::after {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .skill:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Imagen dentro del card */
 .skill img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 8px;
-  transition: transform 0.3s ease;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
 }
 
-.skill img:hover {
-  transform: scale(1.1);
+/* Hover en imagen */
+.skill:hover img {
+  transform: rotate(15deg) scale(1.1);
 }
 
+/* Texto dentro del card */
 .skill p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 800;
-  text-align: center;
-}
-/* ====== FORMULARIO DE CONTACTO ====== */
-.style-form {
-  margin-top: 12px;
-}
-.style-btn{
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-.contact {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 20px;
-}
-.field {
-  display: grid;
-  gap: 8px;
-}
-input, textarea {
-  padding: 12px 14px;
-  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-  border-radius: 12px;
-  outline: none;
+  font-size: 16px;
   color: var(--text);
-  background: var(--surface);
+  font-weight: 600;
+  padding-top: 10px;
+  transition: color 0.3s ease;
 }
-textarea {
-  min-height: 130px;
-  resize: vertical;
-}
-.card-actions {
-  margin-top: 18px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.card-body{
-  padding: 18px;
-}
-.card {
-  border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
-  width: 100%;
-  border-radius: var(--radius);
-  background: var(--card);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-/* proyectos */
 
+/* Hover en texto */
+.skill:hover p {
+  color: var(--accent);
+}
+/*/* ================================== */
+/* ====== PROJECTS ====== */
+/* ================================== */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 22px;
-}
-
-.card-article {
-  max-width: 360px;
+  gap: 24px;
   width: 100%;
+  max-width: 1200px; /* opcional, para limitar el ancho máximo */
+  margin: 0 auto;
+}
+/* ============================= */
+/* Card de proyecto */
+/* ============================= */
+.card-article {
+  max-width: 280px;
   margin: 0 auto;
   border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
   border-radius: var(--radius);
   background: var(--card);
   box-shadow: var(--shadow);
   overflow: hidden;
+/* Entrada inicial */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }
+
+/* Activa animación de entrada */
+.card-article.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover en card */
+.card-article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  border-color: var(--accent);
+}
+
+/* ============================= */
+/* Imagen dentro de la card */
+/* ============================= */
 .card-article img {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  border-top-left-radius: var(--radius);
-  border-top-right-radius: var(--radius);
+  transition: transform 0.4s ease;
+  padding: 5px;
 }
-.card-article h3 {
-  margin: 0 0 6px;
+
+.card-article img:hover {
+  transform: scale(1.05) rotate(2deg);
 }
+
+/* ============================= */
+/* Card body */
+/* ============================= */
+.card-body {
+  padding: 16px;
+  position: relative; /* necesario para los logos emergentes */
+}
+
+.card-body h3 {
+  margin: 12px 0 8px;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.card-body p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.4;
+  text-align: justify;
+  margin-bottom: 12px;
+}
+
+/* ============================= */
+/* Tags */
+/* ============================= */
 .tags {
   display: flex;
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin: 10px 0 14px;
+  margin-bottom: 12px;
 }
 
 .tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
   position: relative;
-  padding: 4px 10px;
-  border-radius: 99px;
-  font-size: 14px;
-  border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+  display: inline-block;
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .tag:hover {
@@ -454,26 +572,29 @@ textarea {
   color: white;
 }
 
-/* Logo emergente */
+/* ============================= */
+/* Logos emergentes en hover */
+/* ============================= */
 .tag::after {
   content: "";
   position: absolute;
-  top: -50px; /* lo coloca arriba de la etiqueta */
+  top: 0;
   left: 50%;
-  transform: translateX(-50%) scale(0);
-  width: 40px;
-  height: 40px;
-  background-size: cover;
+  transform: translateX(-50%) translateY(-10px) scale(0);
+  width: 32px;
+  height: 32px;
+  background-size: 32px 32px;
   background-repeat: no-repeat;
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   pointer-events: none;
 }
 
-/* Aparece al hacer hover */
 .tag:hover::after {
-  transform: translateX(-50%) scale(1);
+  transform: translateX(-50%) translateY(-50px) scale(1);
+  opacity: 1;
 }
 
 /* Logos por tecnología */
@@ -489,98 +610,17 @@ textarea {
   background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg");
 }
 
-/* ====== Desktop y tablet grande (≥895px) ====== */
-
-@media screen and (min-width: 895px) {
-  #menuBtn {
-    display: none;
-  }
-  .nav-links {
-    display: flex; gap: 20px; } /* mostramos enlaces */
-  .menu-btn { display: none; }             /* ocultamos botón ☰ */
-  .mobile-menu { display: none !important; } /* ocultamos menú mobile */
+/* ============================= */
+/* Botones en la card */
+/* ============================= */
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
-
-/* ====== Tablet pequeña y móviles (≤89px) ====== */
-@media screen and (max-width: 894px) {
-  .hero-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-areas:
-    "avatar"  
-    "content"
-      "cta";
-    text-align: center;
-    min-width: 0;
-  }
-
-  .hero-content {
-    grid-area: content;
-  }
-  .avatar-wrap {
-    grid-area: avatar;
-    margin-bottom: 24px;
-  }
-  .hero-cta {
-    grid-area: cta;
-  }
-  .nav-links { display: none; }            /* ocultamos enlaces */
-  .menu-btn {
-    display: inline-flex;                  /* mostramos botón ☰ */
-    align-items: center;
-    gap: 8px;
-    border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-    padding: 8px 12px;
-    border-radius: 10px;
-  }
-  .mobile-menu {
-    display: none;                         /* oculto por defecto */
-    position: absolute;
-    top: 64px; left: 0; right: 0;
-    background: var(--surface);
-    border-bottom: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
-  }
-  .mobile-menu.active {
-    display: block;                        /* visible al hacer clic */
-  }
-  .mobile-menu a {
-    display: block;
-    padding: 14px 24px;
-    border-top: 1px solid color-mix(in oklab, var(--muted) 18%, transparent);h
-  }
-}
-#tsparticles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    top: 0;
-    left: 0;
-}
-
-@media screen and (max-width: 535px) {
-  .contact {
-    grid-template-columns: 1fr; /* una columna */
-    justify-content: center;
-    align-items: center;
-  }
-  .style-btn {
-    justify-content: center; /* centra los botones */
-  }
-}
-
-/* Corrige el solapamiento con la navbar sticky */
-#home,
-#about,
-#skills,
-#projects,
-#education,
-#contact {
-  scroll-margin-top: 80px; /* ajusta según la altura de tu navbar (64px + un poco extra) */
-}
-/* ====== Educación y Experiencia ====== */
-
-/* ====== Timeline ====== */
+/* ================================== */
+/* ====== TIMELINE (Educación / Experiencia) ====== */
+/* ================================== */
 .timeline {
   border-left: 2px solid color-mix(in oklab, var(--muted) 40%, transparent);
   margin-left: 8px;
@@ -596,7 +636,16 @@ textarea {
   border-radius: var(--radius);
   background: color-mix(in oklab, var(--card) 85%, transparent);
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease, background 0.3s ease;
+
+  /* Entrada inicial para animación */
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: transform 0.5s ease, opacity 0.5s ease, background 0.3s ease;
+}
+
+.t-item.active {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .t-item:hover {
@@ -604,7 +653,6 @@ textarea {
   transform: translateX(6px);
 }
 
-/* Punto de cada hito */
 .t-item::before {
   content: "";
   position: absolute;
@@ -620,10 +668,9 @@ textarea {
 
 .t-item:hover::before {
   transform: scale(1.3);
-  box-shadow: 0 0 16px var(--accent);
+  box-shadow: 0 0 14px var(--accent);
 }
 
-/* Títulos y fechas */
 .t-item h3 {
   margin: 0;
   font-size: 1.1rem;
@@ -637,10 +684,70 @@ textarea {
   margin-bottom: 6px;
 }
 /* ================================== */
-/* ====== EFECTO SCROLL REVEAL ====== */
+/* ====== CONTACT ====== */
 /* ================================== */
+/* Sección de contacto */
+.contact {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 20px;
+}
+/* Campos del formulario */
+.field {
+  display: grid;
+  gap: 8px;
+}
+/* Estilos para inputs y textarea */
+input, textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--muted);
+  border-radius: 12px;
+  outline: none;
+  color: var(--text);
+  background: var(--surface);
+}
+/* Estilos específicos para textarea */
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+/* Estilo para el formulario */
+.style-form {
+  margin-top: 12px;
+}
+/* Contenedor para los botones */
+.style-btn {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Botones de envío y reseteo */
+.card-body{
+  padding: 18px;
+}
+/* Estilos para la tarjeta */
+.card {
+  border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+/* Contenedor para los enlaces sociales */
+.social-links {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
 
-/* Estado inicial: oculto y desplazado */
+/* ================================== */
+/* ====== SCROLL REVEAL ====== */
+/* ================================== */
+/* Clases para animaciones de revelado al hacer scroll */
 .reveal {
   opacity: 0;
   transition:
@@ -648,83 +755,154 @@ textarea {
     transform var(--reveal-duration) var(--reveal-ease);
   will-change: opacity, transform;
 }
-
-/* Direcciones: solo cambian la transformación inicial */
-.reveal.fade-left   { transform: translateX(calc(-1 * var(--reveal-distance))); }
-.reveal.fade-right  { transform: translateX(var(--reveal-distance)); }
-.reveal.fade-up     { transform: translateY(calc(-1 * var(--reveal-distance))); }
-.reveal.fade-down   { transform: translateY(var(--reveal-distance)); }
-
+/* Variantes de dirección izquierda */
+.reveal.fade-left {
+  transform: translateX(calc(-1 * var(--reveal-distance)));
+}
+/* Variantes de dirección derecha */
+.reveal.fade-right {
+  transform: translateX(var(--reveal-distance));
+}
+/* Variantes de dirección arriba */
+.reveal.fade-up {
+  transform: translateY(calc(-1 * var(--reveal-distance)));
+}
+/* Variantes de dirección abajo */
+.reveal.fade-down {
+  transform: translateY(var(--reveal-distance));
+}
 /* Estado final: visible */
 .reveal.visible {
   opacity: 1;
   transform: translate(0, 0);
 }
-
-
 /* ================================== */
-/* ====== FOOTER MEJORADO ====== */
-/* ================================== */
+/* ====== FOOTER ====== */
+/* ================================== */ 
+/* Pie de página */
 .site-footer {
-  background: var(--surface); /* Un color de fondo sutil */
+  background: var(--surface);
   border-top: 1px solid color-mix(in oklab, var(--muted) 20%, transparent);
-  padding: 2.5rem 0;
-  margin-top: 5rem;
+  padding: 0.2rem 0;
+  margin-top: 20px;
 }
-
+/* Contenedor interno del footer */
 .footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 24px;
+    width: 100%;
+    margin: 40px auto;
+    max-width: 1100px;
 }
-
+/* Texto de copyright */
 .footer-copyright {
   display: flex;
-  flex-direction: column; /* Apila las dos líneas de texto */
-  gap: 0.25rem; /* Pequeño espacio entre ellas */
+  flex-direction: column;
+  gap: 0.25rem;
 }
-
+/* Contenedor para los enlaces sociales y botones */
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Espacio entre los iconos y el botón */
+  gap: 1rem;
 }
-
+/* Estilos para los iconos sociales */
 .social-icon {
   color: var(--muted);
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
+/* Efecto hover en iconos sociales */
 .social-icon:hover {
   color: var(--accent);
   transform: translateY(-2px); /* Efecto sutil al pasar el ratón */
 }
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 15px; /* Espacio entre los iconos */
+/* ================================== */
+/* ====== PARTICLES CANVAS ====== */
+#tsparticles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 
-/* Responsividad para el footer mejorado */
-@media (max-width: 600px) {
+/* ================================== */
+/* ====== MEDIA QUERIES ====== */
+/* ================================== */
+@media screen and (min-width: 895px) {
+  #menuBtn {
+    display: none;
+  }
+  .nav-links {
+    display: flex; gap: 20px; } /* mostramos enlaces */
+  .menu-btn { display: none; }             /* ocultamos botón ☰ */
+  .mobile-menu { display: none; } /* ocultamos menú mobile */
+}
+
+@media screen and (max-width: 894px) {
+  .nav-links { display: none; }
+  .menu-btn { display: inline-flex; }
+  .mobile-menu { display: block; }
+  .mobile-menu a { display: block; }
+}
+
+
+@media screen and (max-width: 740px) {
+  .hero-grid {
+    grid-template-areas:
+      "avatar"
+      "content"
+      "cta";
+    text-align: center;
+  }
+  .hero-content {
+    grid-area: content;
+  }
+  .avatar-wrap {
+    grid-area: avatar;
+  }
+  .hero-cta {
+    grid-area: cta;
+}
+.contact {
+    grid-template-columns: 1fr; /* una columna */
+    justify-content: center;
+    align-items: center;
+  }
+  .style-btn {
+    justify-content: center; /* centra los botones */
+  }
+}
+/* Corrige el solapamiento con la navbar sticky */
+#home,
+#about,
+#skills,
+#projects,
+#education,
+#contact {
+  scroll-margin-top: 80px; /* ajusta según la altura de tu navbar (64px + un poco extra) */
+}
+
+@media screen and (max-width: 894px) {
   .footer-container {
-    flex-direction: column; /* Apila todo en una columna */
-    gap: 2rem;
+    flex-direction: column;
+    text-align: center;
   }
-  .footer-copyright {
-    text-align: center; /* Centra el texto del copyright */
-    order: 2; /* Mueve el copyright debajo de los enlaces */
-  }
-  .footer-links {
-    order: 1; /* Mueve los enlaces arriba */
-  }
+
 }
 
-@media screen and (max-width: 1200px) {
-  .contact {
-    grid-template-columns: 1fr; /* columna única */
-    justify-items: center; /* centra los elementos */
+/* @media screen and (max-width: 366px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: center;
   }
-}
+  .nav-btns {
+    margin-top: 8px;
+  }
+
+} */

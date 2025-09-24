@@ -112,23 +112,23 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   };
 
-    // ----------------------------
+  // ----------------------------
   // 8. Envío de formulario con EmailJS
   // ----------------------------
   emailjs.init("9QUrkBRou0gg-STAW");
   const contactForm = document.getElementById("contactForm");
-  if(contactForm){
-    contactForm.addEventListener("submit", function(e){
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
       emailjs.sendForm("service_t9v8fkj", "template_1gcc2w9", contactForm, "9QUrkBRou0gg-STAW")
-      .then(function(response){
-        alert("¡Mensaje enviado con éxito! 🎉");
-        contactForm.reset();
-        console.log("EmailJS response:", response);
-      }, function(error){
-        console.error("Error EmailJS:", error);
-        alert("Error al enviar el formulario. Revisa la consola.");
-      });
+        .then(function (response) {
+          alert("¡Mensaje enviado con éxito! 🎉");
+          contactForm.reset();
+          console.log("EmailJS response:", response);
+        }, function (error) {
+          console.error("Error EmailJS:", error);
+          alert("Error al enviar el formulario. Revisa la consola.");
+        });
     });
   }
 
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const title = document.getElementById("elegant-title");
   const subtitle = document.querySelector(".title");
 
-  if(title){
+  if (title) {
     const letters = title.textContent.split("");
     title.textContent = "";
     letters.forEach(letter => {
@@ -176,6 +176,69 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+  // ----------------------------
+// ===== PROYECTOS =====
+const projects = document.querySelectorAll('.card-article');
+const projectsSection = document.querySelector('.projects');
+
+const observerProjects = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      projects.forEach((project, index) => {
+        setTimeout(() => project.classList.add('active'), index * 100);
+      });
+    } else {
+      projects.forEach(project => project.classList.remove('active'));
+    }
+  });
+}, { threshold: 0.3 });
+
+observerProjects.observe(projectsSection);
+
+
+// ===== TIMELINE / EDUCACIÓN =====
+const timelineItems = document.querySelectorAll('.timeline .t-item');
+const timelineSection = document.querySelector('#timeline');
+
+const observerTimeline = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      timelineItems.forEach((item, index) => {
+        setTimeout(() => item.classList.add('active'), index * 150);
+      });
+    } else {
+      timelineItems.forEach(item => item.classList.remove('active'));
+    }
+  });
+}, { threshold: 0.3 });
+
+observerTimeline.observe(timelineSection);
+
+
+// ===== HABILIDADES =====
+const skills = document.querySelectorAll('.skill');
+const skillsSection = document.querySelector('.skills-section');
+
+const observerSkills = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      skills.forEach((skill, index) => {
+        setTimeout(() => skill.classList.add('active'), index * 100);
+      });
+    } else {
+      skills.forEach(skill => skill.classList.remove('active'));
+    }
+  });
+}, { threshold: 0.3 });
+
+observerSkills.observe(skillsSection);
+
+
+
+
+
+
+
 
   // ----------------------------
   // Inicialización general
