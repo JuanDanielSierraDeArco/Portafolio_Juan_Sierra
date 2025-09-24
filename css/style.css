@@ -795,7 +795,7 @@ textarea {
     gap: 1rem;
     padding: 0 24px;
     width: 100%;
-    margin: 40px auto;
+    margin: 20px auto;
     max-width: 1100px;
 }
 /* Texto de copyright */
@@ -878,15 +878,6 @@ textarea {
     justify-content: center; /* centra los botones */
   }
 }
-/* Corrige el solapamiento con la navbar sticky */
-#home,
-#about,
-#skills,
-#projects,
-#education,
-#contact {
-  scroll-margin-top: 80px; /* ajusta según la altura de tu navbar (64px + un poco extra) */
-}
 
 @media screen and (max-width: 894px) {
   .footer-container {
@@ -895,14 +886,3 @@ textarea {
   }
 
 }
-
-/* @media screen and (max-width: 366px) {
-  .nav-inner {
-    flex-direction: column;
-    align-items: center;
-  }
-  .nav-btns {
-    margin-top: 8px;
-  }
-
-} */
