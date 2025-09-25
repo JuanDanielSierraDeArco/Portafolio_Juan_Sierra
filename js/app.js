@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // ----------------------------
-  // 8. Envío de formulario con EmailJS
+  // Envío de formulario con EmailJS
   // ----------------------------
   emailjs.init("9QUrkBRou0gg-STAW");
   const contactForm = document.getElementById("contactForm");
@@ -232,14 +232,6 @@ const observerSkills = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 
 observerSkills.observe(skillsSection);
-
-
-
-
-
-
-
-
   // ----------------------------
   // Inicialización general
   // ----------------------------
