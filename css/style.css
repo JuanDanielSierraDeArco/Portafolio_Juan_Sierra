@@ -614,6 +614,18 @@ img {
   background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg");
 }
 
+.tag.angular::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
 /* ============================= */
 /* Botones en la card */
 /* ============================= */
