@@ -610,6 +610,10 @@ img {
   background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg");
 }
 
+.tag.angular::after {
+  background-image: url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg");
+}
+
 /* ============================= */
 /* Botones en la card */
 /* ============================= */
